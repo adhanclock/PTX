@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Ustaw Swoją Lokalizację",
+    "message": "Lokalizacja lub kod ustawień",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Włącz Adhany",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Kod ustawień",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Twój kod ustawień zawiera wszystkie preferencje rozszerzenia w momencie jego wygenerowania, w tym lokalizację, metodę obliczeń, niestandardowe przesunięcia czasu i ustawienia adhan. Użyj go, aby szybko przywrócić swoje ustawienia na nowym urządzeniu lub udostępnić je innym.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Skopiowano",
     "description": ""
   }
 }

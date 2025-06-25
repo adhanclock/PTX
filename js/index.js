@@ -1,4 +1,4 @@
-let appSettings = {};
+let appData = {};
 let adhanStatus = {};
 
 chrome.runtime.onMessage.addListener((msg) => { if ('runApp' in msg) { runApp() } });
@@ -14,55 +14,55 @@ const goGoRun = (info) => {
 
 const runApp = async () => {
 
-    let result = await chrome.storage.local.get(['appSettings']);
-    appSettings = result.appSettings;
+    appData = (await chrome.storage.local.get(['appData'])).appData;
+
     let asResult = await chrome.storage.local.get(['adhanStatus']);
     if (asResult.adhanStatus)
         adhanStatus = asResult.adhanStatus;
 
-    $('#clock').attr("src", appSettings.clock);
-    $('.menu-clock-img').attr("src", appSettings.icon);
-    $('#iconImg').attr("src", appSettings.icon);
-    $('#barImg').attr("src", appSettings.bar);
+    $('#clock').attr("src", appData.clock);
+    $('.menu-clock-img').attr("src", appData.icon);
+    $('#iconImg').attr("src", appData.icon);
+    $('#barImg').attr("src", appData.bar);
 
-    $('#elapsedText').html(appSettings.elapsedText);
-    $('#nextText').css("background-color", appSettings.iconColor);
-    $('#nextText').css("color", appSettings.iconTextColor);
-    $('#nextText').html(appSettings.nextText);
-    $('#ntTitle').html(appSettings.nextTextTitle);
+    $('#elapsedText').html(appData.elapsedText);
+    $('#nextText').css("background-color", appData.iconColor);
+    $('#nextText').css("color", appData.iconTextColor);
+    $('#nextText').html(appData.nextText);
+    $('#ntTitle').html(appData.nextTextTitle);
 
-    $('#todaysDate').text(appSettings.todaysDate);
-    $('.todaysDateArabic').text(appSettings.todaysDateArabic);
+    $('#todaysDate').text(appData.todaysDate);
+    $('.todaysDateArabic').text(appData.todaysDateArabic);
 
     $('#remainingForIftar').hide();
-    if (appSettings.remainingForIftar) {
-        $('#remainingForIftar').html(appSettings.remainingForIftar).show();
+    if (appData.remainingForIftar) {
+        $('#remainingForIftar').html(appData.remainingForIftar).show();
     }
 
-    Object.entries(appSettings.i18n).forEach(function ([key, value]) {
+    Object.entries(appData.i18n).forEach(function ([key, value]) {
         $('#' + key).text(value);
         $('.' + key).text(value);
     });
 
     $('.vakitDiv').hide();
-    for (let i = 0; i < appSettings.appVakits.length; i++) {
-        let vakit = appSettings.appVakits[i].name.toLowerCase();
+    for (let i = 0; i < appData.appVakits.length; i++) {
+        let vakit = appData.appVakits[i].name.toLowerCase();
         let vd = $('.' + vakit + 'Div');
-        let timeValue = appSettings.appVakits[i].displayTime;
+        let timeValue = appData.appVakits[i].displayTime;
 
         if (vakit === "duha") {
-            let duhaend = appSettings.allVakits.find(f => f.name === 'Duhaend');
+            let duhaend = appData.allVakits.find(f => f.name === 'Duhaend');
             let duhaendTime = duhaend.displayTime;
             timeValue += " - " + duhaendTime;
         }
 
         let dTitle = '';
         if (vakit === "midnight")
-            dTitle = "2/3 @ " + appSettings.twoThirdTime;
+            dTitle = "2/3 @ " + appData.twoThirdTime;
 
-        let vakitText = appSettings.i18n[vakit + 'Text'];
-        if (appSettings.isJumua && vakit === 'dhuhr')
-            vakitText = appSettings.i18n.jumuaText
+        let vakitText = appData.i18n[vakit + 'Text'];
+        if (appData.isJumua && vakit === 'dhuhr')
+            vakitText = appData.i18n.jumuaText
 
         vd.html(`
                 <div class="pt-1 small" title="${dTitle}">
@@ -75,20 +75,20 @@ const runApp = async () => {
 
         let cClass = 'bg-dark border border-light rounded';
         vd.removeClass(cClass);
-        if (appSettings.appVakits[i].isCurrentVakit == 1) {
+        if (appData.appVakits[i].isCurrentVakit == 1) {
             vd.addClass(cClass);
         }
 
-        if (i < Math.ceil(appSettings.appVakits.length / 2))
+        if (i < Math.ceil(appData.appVakits.length / 2))
             $('#vakitsRow1').append(vd);
         else
             $('#vakitsRow2').append(vd);
         vd.show();
     }
 
-    for (let i = 0; i < appSettings.allVakits.length; i++) {
-        let vakit = appSettings.allVakits[i].name.toLowerCase();
-        $('#offset-' + vakit).html(appSettings.allVakits[i].displayTime);
+    for (let i = 0; i < appData.allVakits.length; i++) {
+        let vakit = appData.allVakits[i].name.toLowerCase();
+        $('#offset-' + vakit).html(appData.allVakits[i].displayTime);
     }
 
     setFields();
@@ -124,28 +124,28 @@ $(function () {
     });
 
     $("#calculationMethod").change(function () {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.calculationMethod = $('#calculationMethod').val();
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.calculationMethod = $('#calculationMethod').val();
+            saveAppDataAndRefresh(appData);
         });
     });
 
     $("#desktopNotificationsToggle").click(function () {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.desktopNotifications = !appSettings.desktopNotifications;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.desktopNotifications = !appData.settings.desktopNotifications;
+            saveAppDataAndRefresh(appData);
             chrome.notifications.clear('test');
-            if (appSettings.desktopNotifications) {
+            if (appData.settings.desktopNotifications) {
                 chrome.notifications.create(
                     'test',
                     {
                         type: "image",
                         imageUrl: 'images/notification.jpg',
                         iconUrl: 'images/icons/128.png',
-                        title: appSettings.i18n['desktopNotificationsOnTitle'],
-                        message: appSettings.address
+                        title: appData.i18n['desktopNotificationsOnTitle'],
+                        message: appData.settings.address
                     }
                 );
                 chrome.storage.local.set({ 'lastAlert': 'settingUpdate' });
@@ -154,72 +154,72 @@ $(function () {
     });
 
     $("#showImsakToggle").click(function () {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.showImsak = !appSettings.showImsak;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.showImsak = !appData.settings.showImsak;
+            saveAppDataAndRefresh(appData);
         });
     });
 
     $("#showDuhaToggle").click(function () {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.showDuha = !appSettings.showDuha;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.showDuha = !appData.settings.showDuha;
+            saveAppDataAndRefresh(appData);
         });
     });
 
     $("#showMidnightToggle").click(function () {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.showMidnight = !appSettings.showMidnight;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.showMidnight = !appData.settings.showMidnight;
+            saveAppDataAndRefresh(appData);
         });
     });
 
     $("#hour24Toggle").click(function () {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.timeFormat = (appSettings.timeFormat == 12) ? 24 : 12;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.timeFormat = (appData.settings.timeFormat == 12) ? 24 : 12;
+            saveAppDataAndRefresh(appData);
         });
     });
 
     $(".adhansToggle").click(function () {
         navigator.serviceWorker.controller.postMessage({ endAdhanCall: true });
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.areAdhansEnabled = !appSettings.areAdhansEnabled;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.areAdhansEnabled = !appData.settings.areAdhansEnabled;
+            saveAppDataAndRefresh(appData);
             displayAdhansAndOffsets();
         });
     });
 
     $("#hanafiAsrToggle").click(function () {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.hanafiAsr = !appSettings.hanafiAsr;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.hanafiAsr = !appData.settings.hanafiAsr;
+            saveAppDataAndRefresh(appData);
         });
     });
 
     $(".iconButton").click(function (e) {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.iconStyle = e.currentTarget.value;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.iconStyle = e.currentTarget.value;
+            saveAppDataAndRefresh(appData);
         });
     });
 
     $("#googleMapsButton").click(function (e) {
-        window.open('https://maps.google.com/?q=' + appSettings.address)
+        window.open('https://maps.google.com/?q=' + appData.settings.address)
     });
 
     $(".lastHourHilite").click(function (e) {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.lastHourHilite = ((appSettings.lastHourHilite ?? 0) + 1) % 2;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.lastHourHilite = ((appData.lastHourHilite ?? 0) + 1) % 2;
+            saveAppDataAndRefresh(appData);
         });
     });
 
@@ -229,20 +229,25 @@ $(function () {
         showLoading();
         $('#addressButton').attr('disabled', true);
 
-        chrome.storage.local.get(['appSettings'], function (result) {
+        chrome.storage.local.get(['appData'], function (result) {
 
-            appSettings = result.appSettings;
-            let ceCallURL = 'https://smartazanclock.com/geolocation?address=' + $('#address').val();
+            appData = result.appData;
+
+            let ceCallURL = 'https://smartazanclock.com/geosettings?address=' + $('#address').val();
 
             fetch(ceCallURL, { method: 'POST' }).then((response) => {
                 if (response.status == 200) {
                     response.json().then((data) => {
-                        appSettings.address = data.address;
-                        appSettings.lat = data.lat;
-                        appSettings.lng = data.lng;
-                        appSettings.timeZoneID = data.timeZoneID;
-                        chrome.storage.local.set({ 'appSettings': appSettings }, () => {
+
+                        settingsCodeFields.forEach(field => {
+                            if (field in data) {
+                                appData.settings[field] = data[field];
+                            }
+                        });
+
+                        chrome.storage.local.set({ 'appData': appData }, () => {
                             goGoRun('address updated');
+                            $('#address').val(appData.settings.address);
                             $('#addressButton').attr('disabled', false);
                             $('#loadingImg').attr('src', '/images/check.png');
                             $(':focus').blur();
@@ -274,8 +279,8 @@ $(function () {
         fetch('_locales/' + lang + '/messages.json').then((response) => {
             response.json().then((data) => {
                 Object.entries(data).forEach(([key, value]) => { i18nValues[key] = value.message });
-                appSettings.i18n = i18nValues;
-                saveAppSettingsAndRefresh(appSettings);
+                appData.i18n = i18nValues;
+                saveAppDataAndRefresh(appData);
                 displayAdhansAndOffsets();
             });
         });
@@ -302,12 +307,54 @@ $(function () {
         navigator.serviceWorker.controller.postMessage({ endAdhanCall: true });
     });
 
+    $("#settingsCodeButton").click(async function () {
+        const $button = $(this);
+        if ($button.prop('disabled')) return;
+        let originalButtonText = $button.html();
+        $button.prop('disabled', true);
+        try {
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            const requestOptions = { method: "POST", headers: myHeaders, body: JSON.stringify(appData.settings) };
+            const response = await fetch("https://smartazanclock.com/settings-code", requestOptions);
+            const data = await response.json();
+            const backupCode = data.id;
+            await navigator.clipboard.writeText(backupCode);
+            $button.html(`
+                    <span><img src="images/check-mini.png" /></span>
+                    <span>${backupCode} <small>${appData.i18n.copiedText}</small></span>
+                `);
+        } catch (err) {
+            $button.html('Error!');
+        } finally {
+            setTimeout(() => {
+                $button.html(originalButtonText);
+                $button.prop('disabled', false);
+            }, 1200);
+        }
+    });
+
+    let scb = document.getElementById('settingsCodeButton');
+    let tooltip = bootstrap.Tooltip.getOrCreateInstance(scb, { trigger: 'hover', customClass: 'custom-tooltip' });
+    scb.addEventListener('show.bs.tooltip', () => {
+        const currentContent = tooltip._config.title;
+        if (currentContent !== appData.i18n.settingsCodeInfo) {
+            tooltip._config.title = appData.i18n.settingsCodeInfo;
+        }
+    });
+
+    let arb = document.getElementById('appResetButton');
+    let tooltipAR = bootstrap.Tooltip.getOrCreateInstance(arb, { trigger: 'hover', customClass: 'custom-red-tooltip' });
+    arb.addEventListener('show.bs.tooltip', () => {
+        tooltipAR._config.title = 'Reset Version ' + chrome.runtime.getManifest().version;
+    });
+
 });
 
 document.addEventListener('click', function (event) {
 
     if (event.target && event.target.classList.contains('playAudioButton')) {
-        playAudio(appSettings.adhans[event.target.dataset.vakit]);
+        playAudio(appData.settings.adhans[event.target.dataset.vakit]);
     }
 
     if (event.target && event.target.classList.contains('adhanRecitorBtn')) {
@@ -332,10 +379,10 @@ document.addEventListener('click', function (event) {
 
 document.getElementById('adhanOffsetSettings').addEventListener('change', function (event) {
     if (event.target && event.target.matches('select.adhanDD')) {
-        chrome.storage.local.get(['appSettings'], function (result) {
-            appSettings = result.appSettings;
-            appSettings.adhans[event.target.dataset.name] = event.target.value * 1;
-            saveAppSettingsAndRefresh(appSettings);
+        chrome.storage.local.get(['appData'], function (result) {
+            appData = result.appData;
+            appData.settings.adhans[event.target.dataset.name] = event.target.value * 1;
+            saveAppDataAndRefresh(appData);
             if (event.target.value != 0) {
                 $('#adhanRow' + event.target.dataset.name).removeClass('d-none');
             }
@@ -344,17 +391,17 @@ document.getElementById('adhanOffsetSettings').addEventListener('change', functi
 });
 
 document.getElementById('volume').addEventListener('change', function (event) {
-    chrome.storage.local.get(['appSettings'], function (result) {
-        appSettings = result.appSettings;
-        appSettings.volume = event.target.value * 1;
-        saveAppSettingsAndRefresh(appSettings);
+    chrome.storage.local.get(['appData'], function (result) {
+        appData = result.appData;
+        appData.settings.volume = event.target.value * 1;
+        saveAppDataAndRefresh(appData);
         playAudio(102);
     });
 });
 
-const saveAppSettingsAndRefresh = (appSettings) => {
-    chrome.storage.local.set({ 'appSettings': appSettings }, function () {
-        goGoRun('appSettings updated');
+const saveAppDataAndRefresh = (appData) => {
+    chrome.storage.local.set({ 'appData': appData }, function () {
+        goGoRun('appData updated');
         $(':focus').blur();
     });
 }
@@ -366,35 +413,35 @@ const setFields = async () => {
         $('#stopAdhanDiv').show();
 
     if (!$('#basicSettings').is(':visible'))
-        $('#address').val(appSettings.address);
+        $('#address').val(appData.settings.address);
 
     let topAddressMaxLen = 13;
-    let topAddress = appSettings.address.substring(0, topAddressMaxLen) + ((appSettings.address.length > topAddressMaxLen) ? '…' : '');
+    let topAddress = appData.settings.address.substring(0, topAddressMaxLen) + ((appData.settings.address.length > topAddressMaxLen) ? '…' : '');
     $('#addressMenuText').html(topAddress);
-    $('#appResetButton').text('Reset ' + 'V.' + chrome.runtime.getManifest().version);
-    $('.timeNowTitle').html(appSettings.timeNow).attr('title', 'Current Time in ' + appSettings.timeZoneID);
-    $('#calculationMethod').val(appSettings.calculationMethod);
-    $('#fajrAngle').html(appSettings.i18n['fajrText'] + ' ' + appSettings.fajrAngle);
-    $('#ishaAngle').html(appSettings.i18n['ishaText'] + ' ' + appSettings.ishaAngle);
+    $('.timeNowTitle').html(appData.timeNow).attr('title', 'Current Time in ' + appData.settings.timeZoneID);
+    $('#calculationMethod').val(appData.settings.calculationMethod);
+
+    $('#fajrAngle').html(appData.i18n['fajrText'] + ' ' + appData.fajrAngle);
+    $('#ishaAngle').html(appData.i18n['ishaText'] + ' ' + appData.ishaAngle);
 
     $('.iconButton').removeClass('btn-primary').addClass('btn-darkish');
-    $('#' + appSettings.iconStyle.toLowerCase() + 'Button').removeClass('btn-darkish').addClass("btn-primary");
+    $('#' + appData.settings.iconStyle.toLowerCase() + 'Button').removeClass('btn-darkish').addClass("btn-primary");
 
     $('#desktopNotificationsOn').hide();
     $('#desktopNotificationsOff').hide();
-    if (appSettings.desktopNotifications)
+    if (appData.settings.desktopNotifications)
         $('#desktopNotificationsOn').show();
     else
         $('#desktopNotificationsOff').show();
 
     $('.hanafiAsrOption').hide();
-    if (appSettings.hanafiAsr)
+    if (appData.settings.hanafiAsr)
         $('#hanafiAsrOn').show();
     else
         $('#hanafiAsrOff').show();
 
     $('.showImsakOption').hide();
-    if (appSettings.showImsak) {
+    if (appData.settings.showImsak) {
         $('#showImsakOn').show();
     }
     else {
@@ -402,7 +449,7 @@ const setFields = async () => {
     }
 
     $('.showDuhaOption').hide();
-    if (appSettings.showDuha) {
+    if (appData.settings.showDuha) {
         $('#showDuhaOn').show();
     }
     else {
@@ -410,7 +457,7 @@ const setFields = async () => {
     }
 
     $('.showMidnightOption').hide();
-    if (appSettings.showMidnight) {
+    if (appData.settings.showMidnight) {
         $('#showMidnightOn').show();
     }
     else {
@@ -419,7 +466,7 @@ const setFields = async () => {
     }
 
     $('.hour24Option').hide();
-    if (appSettings.timeFormat == 12) {
+    if (appData.settings.timeFormat == 12) {
         $('#hour24Off').show();
     }
     else {
@@ -427,8 +474,8 @@ const setFields = async () => {
     }
 
     $('.lastHourHilite').hide();
-    if (appSettings.isLastHour) {
-        if (appSettings.lastHourHilite == 0) {
+    if (appData.settings.isLastHour) {
+        if (appData.lastHourHilite == 0) {
             $('#lastHourHiliteOff').show();
         }
         else {
@@ -442,7 +489,7 @@ const setFields = async () => {
         const option = document.createElement('option');
         option.value = language.code;
         option.textContent = language.name;
-        if (appSettings.i18n.languageCode == language.code)
+        if (appData.i18n.languageCode == language.code)
             option.selected = true;
         dispLang.appendChild(option);
     });
@@ -453,14 +500,14 @@ const setFields = async () => {
         const option = document.createElement('option');
         option.value = m.id;
         option.textContent = m.name;
-        if (appSettings.calculationMethod == m.id)
+        if (appData.settings.calculationMethod == m.id)
             option.selected = true;
         calculationMethod.appendChild(option);
     });
 
-    $('#audioVolumeIcon').attr('src', 'images/audio-' + appSettings.volume + '.png');
-    $('#audioVolumeDiv').attr('title', 'Audio Volume: ' + appSettings.volume);
-    if (appSettings.areAdhansEnabled)
+    $('#audioVolumeIcon').attr('src', 'images/audio-' + appData.settings.volume + '.png');
+    $('#audioVolumeDiv').attr('title', 'Audio Volume: ' + appData.settings.volume);
+    if (appData.settings.areAdhansEnabled)
         $('#volume').attr('disabled', false);
     else
         $('#volume').attr('disabled', true);
@@ -471,30 +518,30 @@ const setFields = async () => {
 
 const displayAdhansAndOffsets = () => {
 
-    $('#volume').val(appSettings.volume);
+    $('#volume').val(appData.settings.volume);
 
     $('.offsetCurrentVakit').removeClass('offsetCurrentVakit');
     let adhanVakits = ['imsak', 'fajr', 'duha', 'duhaend', 'dhuhr', 'asr', 'maghrib', 'isha'];
-    let aoContent = `<div class="badge p-0 mt-0">${appSettings.i18n.adhansAndOffsetsTitle}</div>`;
+    let aoContent = `<div class="badge p-0 mt-0">${appData.i18n.adhansAndOffsetsTitle}</div>`;
     let offsetPresent = false;
-    let imsakOffset = imsakDefaultOffset + (appSettings.vakitOffsets && appSettings.vakitOffsets.imsak ? appSettings.vakitOffsets.imsak : 0);
-    let duhaOffset = duhaDefaultOffset + (appSettings.vakitOffsets && appSettings.vakitOffsets.duha ? appSettings.vakitOffsets.duha : 0);
-    let duhaendOffset = duhaendDefaultOffset + (appSettings.vakitOffsets && appSettings.vakitOffsets.duhaend ? appSettings.vakitOffsets.duhaend : 0);
-    let currentVakit = appSettings.allVakits.find(f => f.isCurrentVakit).name.toLowerCase();
+    let imsakOffset = imsakDefaultOffset + (appData.settings.vakitOffsets && appData.settings.vakitOffsets.imsak ? appData.settings.vakitOffsets.imsak : 0);
+    let duhaOffset = duhaDefaultOffset + (appData.settings.vakitOffsets && appData.settings.vakitOffsets.duha ? appData.settings.vakitOffsets.duha : 0);
+    let duhaendOffset = duhaendDefaultOffset + (appData.settings.vakitOffsets && appData.settings.vakitOffsets.duhaend ? appData.settings.vakitOffsets.duhaend : 0);
+    let currentVakit = appData.allVakits.find(f => f.isCurrentVakit).name.toLowerCase();
 
     $('.adhan-on').hide();
     $('.adhan-off').hide();
-    if (appSettings.areAdhansEnabled)
+    if (appData.settings.areAdhansEnabled)
         $('.adhan-on').show();
     else
         $('.adhan-off').show();
 
     adhanVakits.forEach((v) => {
-        let thisTime = appSettings.allVakits.find(f => f.name.toLowerCase() == v);
+        let thisTime = appData.allVakits.find(f => f.name.toLowerCase() == v);
         let timeValue = thisTime.displayTime;
         let fajrAdhans = adhanAudios.filter(a => a.isFajrAdhan);
         let adhans = adhanAudios.filter(a => a.isAdhan);
-        let thisAdhanAudioID = appSettings.adhans[v] ?? 0;
+        let thisAdhanAudioID = appData.settings.adhans[v] ?? 0;
         let thisAudioTitle = adhanAudios.find(a => a.id == thisAdhanAudioID)?.name;
         aoContent += `<div id=settingBox${v} class="bg-darkish px-1
                     ${v == 'duha' ? 'rounded-top pt-1' : (v == 'duhaend' ? 'rounded-bottom pb-1' : 'rounded py-2')}
@@ -504,16 +551,16 @@ const displayAdhansAndOffsets = () => {
 
         aoContent += `<div class="col-4">`;
         if (v != 'duhaend')
-            aoContent += `<span class="badge">${appSettings.i18n[v + 'Text']}</span>`;
+            aoContent += `<span class="badge">${appData.i18n[v + 'Text']}</span>`;
 
         if (v == 'imsak')
-            aoContent += `<img title="${appSettings.i18n.fajrText + imsakOffset}" class="img-fluid" src="/images/info.png">`
+            aoContent += `<img title="${appData.i18n.fajrText + imsakOffset}" class="img-fluid" src="/images/info.png">`
 
         if (v == 'duha')
-            aoContent += `<img title="(${appSettings.i18n.sunriseText}+${duhaOffset}) - (${appSettings.i18n.dhuhrText}${duhaendOffset})" class="img-fluid" src="/images/info.png">`
+            aoContent += `<img title="(${appData.i18n.sunriseText}+${duhaOffset}) - (${appData.i18n.dhuhrText}${duhaendOffset})" class="img-fluid" src="/images/info.png">`
 
         if (v == 'isha')
-            aoContent += `<img title="${appSettings.i18n.midnightText} @ ${appSettings.allVakits[9].displayTime} - 2/3 @ ${appSettings.twoThirdTime}" class="img-fluid" src="/images/info.png">`
+            aoContent += `<img title="${appData.i18n.midnightText} @ ${appData.allVakits[9].displayTime} - 2/3 @ ${appData.twoThirdTime}" class="img-fluid" src="/images/info.png">`
 
         aoContent += '</div>';
 
@@ -521,7 +568,7 @@ const displayAdhansAndOffsets = () => {
 
         /* offsets */
 
-        let offsetValue = appSettings.vakitOffsets && appSettings.vakitOffsets[v] ? appSettings.vakitOffsets[v] : 0;
+        let offsetValue = appData.settings.vakitOffsets && appData.settings.vakitOffsets[v] ? appData.settings.vakitOffsets[v] : 0;
         if (offsetValue != 0)
             offsetPresent = true;
         let stdLimit = 90;
@@ -568,9 +615,9 @@ const displayAdhansAndOffsets = () => {
         /* offsets, end */
 
         /* adhan settings */
-        if (appSettings.adhans.hasOwnProperty(v)) {
+        if (appData.settings.adhans.hasOwnProperty(v)) {
             aoContent += `<div class="col-1">`;
-            aoContent += `<img title='${thisAudioTitle}' class="${appSettings.areAdhansEnabled ? 'adhanRecitorBtn pointerOn' : ''} ms-1 img-fluid" data-name=${v} src="images/mic${appSettings.areAdhansEnabled ? '' : '-na'}.png"/>`;
+            aoContent += `<img title='${thisAudioTitle}' class="${appData.settings.areAdhansEnabled ? 'adhanRecitorBtn pointerOn' : ''} ms-1 img-fluid" data-name=${v} src="images/mic${appData.settings.areAdhansEnabled ? '' : '-na'}.png"/>`;
             aoContent += `</div>`;
         }
         else {
@@ -580,7 +627,7 @@ const displayAdhansAndOffsets = () => {
 
         aoContent += '</div>';
 
-        if (appSettings.adhans.hasOwnProperty(v)) {
+        if (appData.settings.adhans.hasOwnProperty(v)) {
 
             aoContent += `<div class="adhanRow" id="adhanRow${v}" style="display:none;">`
             aoContent += `<div class="d-flex flex-row gap-1 mt-2 px-1 justify-content-between align-items-center">`
@@ -612,7 +659,7 @@ const displayAdhansAndOffsets = () => {
 
     });
 
-    let hijriDateOffset = appSettings.hijriDateOffset ?? 0;
+    let hijriDateOffset = appData.settings.hijriDateOffset ?? 0;
 
     $('#hijriDateOffset').html(hijriDateOffset);
     $('#hijriDateIncrease').attr("disabled", false);
@@ -652,7 +699,7 @@ const displayAdhansAndOffsets = () => {
 
 const playAudio = (id) => {
     audioPlayer.src = '/adhans/' + id + '.mp3';
-    audioPlayer.volume = appSettings.volume / 10;
+    audioPlayer.volume = appData.settings.volume / 10;
     $('.playAudioButton').attr('src', '/images/stop.png').addClass('bg-danger');
     audioPlayer.play();
     $('#audioPlayerDiv').show();
@@ -670,21 +717,21 @@ audioPlayer.onended = () => {
 }
 
 const saveOffset = (name, action) => {
-    chrome.storage.local.get(['appSettings'], function (result) {
+    chrome.storage.local.get(['appData'], function (result) {
 
-        appSettings = result.appSettings;
+        appData = result.appData;
 
-        if (!appSettings.vakitOffsets)
-            appSettings.vakitOffsets = {};
+        if (!appData.settings.vakitOffsets)
+            appData.settings.vakitOffsets = {};
 
-        let cv = appSettings.vakitOffsets[name] ?? 0;
+        let cv = appData.settings.vakitOffsets[name] ?? 0;
 
         if (action == '+')
             cv++;
         else
             cv--;
-        appSettings.vakitOffsets[name] = cv;
-        chrome.storage.local.set({ 'appSettings': appSettings }, function () {
+        appData.settings.vakitOffsets[name] = cv;
+        chrome.storage.local.set({ 'appData': appData }, function () {
             goGoRun('offset update');
             $(':focus').blur();
             displayAdhansAndOffsets();
@@ -695,23 +742,23 @@ const saveOffset = (name, action) => {
 
 const saveHijriDateOffset = (action) => {
 
-    chrome.storage.local.get(['appSettings'], function (result) {
+    chrome.storage.local.get(['appData'], function (result) {
 
-        appSettings = result.appSettings;
+        appData = result.appData;
 
-        if (!appSettings.hijriDateOffset)
-            appSettings.hijriDateOffset = 0;
+        if (!appData.settings.hijriDateOffset)
+            appData.settings.hijriDateOffset = 0;
 
-        let cv = appSettings.hijriDateOffset;
+        let cv = appData.settings.hijriDateOffset;
 
         if (action == '+')
             cv++;
         else
             cv--;
 
-        appSettings.hijriDateOffset = cv;
+        appData.settings.hijriDateOffset = cv;
 
-        chrome.storage.local.set({ 'appSettings': appSettings }, function () {
+        chrome.storage.local.set({ 'appData': appData }, function () {
             goGoRun('hijri date offset updated');
             $(':focus').blur();
             displayAdhansAndOffsets();
@@ -723,7 +770,7 @@ const saveHijriDateOffset = (action) => {
 
 const addressSearchFail = () => {
     $('#addressButton').attr('disabled', false);
-    $('#address').val(appSettings.address);
+    $('#address').val(appData.settings.address);
     $(':focus').blur();
     hideLoadingOnError();
 }

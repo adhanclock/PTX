@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "আপনার লোকেশন সেট করুন",
+    "message": "অবস্থান বা সেটিংস কোড",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "আযান সক্রিয় করুন",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "সেটিংস কোড",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "আপনার সেটিংস কোডটি তৈরির সময়ে আপনার সমস্ত এক্সটেনশন পছন্দ, যেমন অবস্থান, গণনা পদ্ধতি, কাস্টম সময় সামঞ্জস্য এবং আজান সেটিংস অন্তর্ভুক্ত করে। এটি ব্যবহার করে আপনি সহজেই নতুন ডিভাইসে আপনার সেটআপ পুনরুদ্ধার করতে বা অন্যদের সঙ্গে ভাগ করে নিতে পারেন।",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "অনুলিপি করা হয়েছে",
     "description": ""
   }
 }

@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "ตงั้สถานะทอี่ ยขู่ องคณุ ",
+    "message": "ตำแหน่งหรือรหัสการตั้งค่า",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "เปิดใช้งานอะซาน",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "รหัสการตั้งค่า",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "รหัสการตั้งค่าของคุณจะรวมการตั้งค่าทั้งหมดของส่วนขยาย ณ เวลาที่สร้างขึ้น รวมถึงตำแหน่ง วิธีการคำนวณ การปรับเวลาแบบกำหนดเอง และการตั้งค่าอาซาน ใช้รหัสดังกล่าวเพื่อกู้คืนการตั้งค่าของคุณอย่างรวดเร็วบนอุปกรณ์ใหม่ หรือแบ่งปันกับผู้อื่น",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "คัดลอกแล้ว",
     "description": ""
   }
 }

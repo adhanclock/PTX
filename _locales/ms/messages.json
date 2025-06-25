@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Lokasi anda",
+    "message": "Lokasi atau Kod Tetapan",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Aktifkan Azan",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Kod Tetapan",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Kod Tetapan anda mengandungi semua keutamaan sambungan pada masa ia dijana, termasuk lokasi, kaedah pengiraan, pelarasan masa tersuai, dan tetapan azan. Gunakannya untuk memulihkan tetapan anda dengan cepat pada peranti baharu atau berkongsinya dengan orang lain.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Disalin",
     "description": ""
   }
 }

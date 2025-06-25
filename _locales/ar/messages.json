@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "موقعك الجغرافي",
+    "message": "الموقع أو رمز الإعدادات",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "تفعيل الأذان",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "رمز الإعدادات",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "يحتوي رمز الإعدادات الخاص بك على جميع تفضيلات الإضافة في وقت إنشائه، بما في ذلك الموقع وطريقة الحساب وتعديلات الوقت المخصصة وإعدادات الأذان. استخدمه لاستعادة إعداداتك بسرعة على جهاز جديد أو لمشاركتها مع الآخرين",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "تم النسخ",
     "description": ""
   }
 }

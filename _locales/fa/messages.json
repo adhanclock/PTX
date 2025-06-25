@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "محل",
+    "message": "موقعیت یا کد تنظیمات",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "فعال‌سازی اذان‌ها",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "کد تنظیمات",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "کد تنظیمات شما در زمان تولید، شامل تمام ترجیحات افزونه از جمله موقعیت مکانی، روش محاسبه، تنظیمات زمانی سفارشی و تنظیمات اذان می‌باشد. از آن برای بازیابی سریع تنظیمات خود در دستگاه جدید یا به‌اشتراک‌گذاری با دیگران استفاده کنید",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "کپی شد",
     "description": ""
   }
 }

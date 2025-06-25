@@ -14,4 +14,4 @@ Si vous êtes intéressé par un appareil dédié qui appelle l’adhane, veuill
 
 Nous espérons que cette extension vous aidera à mieux organiser votre journée et inshallah vous ne raterez jamais la prière!
 
-https://smartazanclock.com/about
+https://adhanclock.com

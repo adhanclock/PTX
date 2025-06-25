@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Imposta la tua posizione",
+    "message": "Posizione o Codice di Configurazione",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Abilita Adhan",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Codice di configurazione",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Il tuo Codice di Configurazione contiene tutte le preferenze dell’estensione al momento della generazione, inclusi la posizione, il metodo di calcolo, le regolazioni personalizzate del tempo e le impostazioni dell’adhan. Usalo per ripristinare rapidamente la tua configurazione su un nuovo dispositivo o condividerla con altri.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Copiato",
     "description": ""
   }
 }

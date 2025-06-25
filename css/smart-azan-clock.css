@@ -124,3 +124,22 @@ body {
     opacity: 0.13;
     background-color: #212529;
 }
+
+.custom-tooltip {
+    --bs-tooltip-bg: #0066cc;
+    --bs-tooltip-color: #ffffff;
+}
+
+.custom-red-tooltip {
+    --bs-tooltip-bg: #bb2d3b;
+    --bs-tooltip-color: #ffffff;
+}
+
+.tooltip {
+    opacity: 0.97 !important;
+
+}
+
+.tooltip .tooltip-inner {
+    text-align: left !important;
+}

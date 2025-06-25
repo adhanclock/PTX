@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Lokasi",
+    "message": "Lokasi atau Kode Pengaturan",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Aktifkan Adzan",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Kode Pengaturan",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Kode Pengaturan Anda berisi semua preferensi ekstensi pada saat dibuat, termasuk lokasi, metode perhitungan, penyesuaian waktu khusus, dan pengaturan adzan. Gunakan kode ini untuk memulihkan pengaturan Anda dengan cepat di perangkat baru atau membagikannya dengan orang lain.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Disalin",
     "description": ""
   }
 }

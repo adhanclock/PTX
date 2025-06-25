@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Ställ In Din Plats",
+    "message": "Plats eller inställningskod",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Aktivera Adhan",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Inställningskod",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Din inställningskod innehåller alla dina tilläggsinställningar vid tidpunkten för genereringen, inklusive plats, beräkningsmetod, anpassade tidsjusteringar och adhan-inställningar. Använd den för att snabbt återställa dina inställningar på en ny enhet eller dela dem med andra.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Kopierat",
     "description": ""
   }
 }

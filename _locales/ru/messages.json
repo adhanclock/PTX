@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Свое местоположение",
+    "message": "Местоположение или код настроек",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Включить азаны",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Код настроек",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Ваш код настроек содержит все параметры расширения на момент его создания, включая местоположение, метод расчета, пользовательские временные смещения и настройки азана. Используйте его, чтобы быстро восстановить настройки на новом устройстве или поделиться ими с другими.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Скопировано",
     "description": ""
   }
 }

@@ -14,4 +14,4 @@ Si está interesado en un dispositivo dedicado que llame a los adhans, eche un v
 
 ¡Esperamos que esta extensión le ayude a organizar mejor su día e inshaAllah nunca se falte una oración!
 
-https://smartazanclock.com/about
+https://adhanclock.com

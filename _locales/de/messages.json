@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Ihr Standort",
+    "message": "Standort oder Einstellungscode",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Adhans aktivieren",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Einstellungscode",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Ihr Einstellungscode enthält alle Erweiterungseinstellungen zum Zeitpunkt seiner Erstellung, einschließlich Standort, Berechnungsmethode, benutzerdefinierter Zeitverschiebungen und Adhan-Einstellungen. Verwenden Sie ihn, um Ihre Konfiguration schnell auf einem neuen Gerät wiederherzustellen oder mit anderen zu teilen.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Kopiert",
     "description": ""
   }
 }

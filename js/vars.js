@@ -49,32 +49,36 @@ const adhanAudios = [
 ];
 
 const languages = [
-	{ code: 'ar', name: 'العربية' },
-	{ code: 'id', name: 'Bahasa Indonesia' },
-	{ code: 'ms', name: 'Bahasa Melayu' },
-	{ code: 'de', name: 'Deutsch' },
-	{ code: 'en', name: 'English' },
-	{ code: 'es', name: 'español' },
-	{ code: 'fr', name: 'Français' },
-	{ code: 'nl', name: 'Nederlands' },
-	{ code: 'it', name: 'italiano' },
-	{ code: 'pl', name: 'polski' },
-	{ code: 'pt', name: 'Portuguese' },
-	{ code: 'sv', name: 'svenska' },
-	{ code: 'ru', name: 'русский' },
-	{ code: 'vi', name: 'Tiếng Việt' },
-	{ code: 'tr', name: 'Türkçe' },
-	{ code: 'uk', name: 'українська' },
-	{ code: 'fa', name: 'فارسی' },
-	{ code: 'hi', name: 'हिन्दी' },
-	{ code: 'bn', name: 'বাংলা' },
-	{ code: 'ta', name: 'தமிழ்' },
+	{ code: 'ar', name: 'عرب' },
+	{ code: 'id', name: 'Ind' },
+	{ code: 'ms', name: 'Mly' },
+	{ code: 'de', name: 'Deu' },
+	{ code: 'en', name: 'Eng' },
+	{ code: 'es', name: 'Esp' },
+	{ code: 'fr', name: 'Fra' },
+	{ code: 'nl', name: 'Ned' },
+	{ code: 'it', name: 'Ita' },
+	{ code: 'pl', name: 'Pol' },
+	{ code: 'pt', name: 'Por' },
+	{ code: 'sv', name: 'Swe' },
+	{ code: 'ru', name: 'Рус' },
+	{ code: 'vi', name: 'Vie' },
+	{ code: 'tr', name: 'Trk' },
+	{ code: 'uk', name: 'Укр' },
+	{ code: 'fa', name: 'فار' },
+	{ code: 'hi', name: 'हिन' },
+	{ code: 'bn', name: 'বাং' },
+	{ code: 'ta', name: 'தம' },
 	{ code: 'th', name: 'ไทย' },
-	{ code: 'ko', name: '한국어' },
+	{ code: 'ko', name: '한글' },
 	{ code: 'ja', name: '日本' }
-]
-
+];
 
 const imsakDefaultOffset = -10;
 const duhaDefaultOffset = 15;
-const duhaendDefaultOffset = -10; 
+const duhaendDefaultOffset = -10;
+
+const settingsCodeFields = ['address', 'calculationMethod', 'adhans', 'timeZoneID', 'lat', 'lng', 'areAdhansEnabled',
+	'adhans', 'vakitOffsets', 'timeFormat', 'showMidnight', 'showDuha', 'showImsak', 'hanafiAsr',
+	'desktopNotifications', 'volume'
+];

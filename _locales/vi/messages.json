@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Thiết lập vị trí của bạn",
+    "message": "Vị trí hoặc Mã Cài Đặt",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Bật Adhan",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Mã Cài Đặt",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Mã Cài Đặt của bạn bao gồm tất cả các tùy chọn của tiện ích mở rộng tại thời điểm được tạo, bao gồm vị trí, phương pháp tính toán, điều chỉnh thời gian tùy chỉnh và cài đặt adhan. Sử dụng mã này để khôi phục cài đặt của bạn một cách nhanh chóng trên thiết bị mới hoặc chia sẻ với người khác.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Đã sao chép",
     "description": ""
   }
 }

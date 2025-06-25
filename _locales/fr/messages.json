@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Votre localisation",
+    "message": "Emplacement ou code de configuration",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Activer les Adhans",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Code de configuration",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Votre code de configuration contient toutes vos préférences d'extension au moment de sa génération, y compris la localisation, la méthode de calcul, les ajustements personnalisés du temps et les paramètres de l’adhan. Utilisez-le pour restaurer rapidement votre configuration sur un nouvel appareil ou la partager avec d'autres.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Copié",
     "description": ""
   }
 }

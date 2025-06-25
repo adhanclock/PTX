@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "位置を設定",
+    "message": "位置情報または設定コード",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "アザーンを有効にする",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "設定コード",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "設定コードには、生成時点でのすべての拡張設定（位置情報、計算方法、カスタム時間オフセット、アザーン設定など）が含まれています。このコードを使えば、新しいデバイスで設定をすばやく復元したり、他の人と共有したりできます。",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "コピーしました",
     "description": ""
   }
 }

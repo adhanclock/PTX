@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "Bepaal jouw locatie",
+    "message": "Locatie of Instellingscode",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "Adhans inschakelen",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "Instellingscode",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "Je Instellingscode bevat al je extensievoorkeuren op het moment van aanmaak, inclusief locatie, berekeningsmethode, aangepaste tijdsinstellingen en adhan-instellingen. Gebruik het om je instellingen snel te herstellen op een nieuw apparaat of om ze te delen met anderen.",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "Gekopieerd",
     "description": ""
   }
 }

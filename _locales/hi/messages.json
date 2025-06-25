@@ -96,7 +96,7 @@
     "description": ""
   },
   "addressTitle": {
-    "message": "अपना स्थान तय करे",
+    "message": "स्थान या सेटिंग्स कोड",
     "description": ""
   },
   "adhansAndOffsetsTitle": {
@@ -133,6 +133,18 @@
   },
   "enableAdhanCallsTitle": {
     "message": "अज़ान सक्षम करें",
+    "description": ""
+  },
+  "settingsCodeTitle": {
+    "message": "सेटिंग्स कोड",
+    "description": ""
+  },
+  "settingsCodeInfo": {
+    "message": "आपका सेटिंग्स कोड उसके बनाए जाने के समय सभी एक्सटेंशन सेटिंग्स को शामिल करता है, जैसे स्थान, गणना विधि, कस्टम समय समायोजन और अज़ान सेटिंग्स। इसे नए डिवाइस पर अपनी सेटिंग्स जल्दी से पुनः प्राप्त करने या दूसरों के साथ साझा करने के लिए उपयोग करें।",
+    "description": ""
+  },
+  "copiedText": {
+    "message": "कॉपी किया गया",
     "description": ""
   }
 }

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/smart-azan-clock.css">
     <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/vars.js"></script>
 </head>
 
@@ -22,6 +23,7 @@
                     <div><audio id="audioPlayer"></audio></div>
                 </div>
             </div>
+
             <div class="card-header p-1 m-0">
 
                 <div class="d-flex flex-row justify-content-between align-items-center">
@@ -186,6 +188,7 @@
                 </div>
 
                 <div id="adhanOffsetSettings" class="tabDiv text-start h-100 pb-3" style="display:none;">
+
                     <div class="d-flex flex-column h-100 justify-content-between" style="overflow: hidden;">
 
                         <div id="adhanOffsetSettingsContent"></div>
@@ -225,19 +228,27 @@
                             </div>
                         </div>
 
-                        <div class="d-flex flex-row justify-content-between align-items-center gap-2">
+                        <div class="d-flex flex-row justify-content-between align-items-center gap-1">
                             <div>
                                 <select class="form-control form-control-sm" id="displayLanguage">
                                 </select>
                             </div>
+
                             <div class="flex-fill">
-                                <button id="appResetButton" class="btn btn-danger p-1 text-light btn-sm col-12"></span>
+                                <button id="settingsCodeButton" title="SettingsCode"
+                                    class="btn btn-sm btn-primary p-1 col-12">
+                                    <span><img src="images/copy.png" class="img-fluid" /></span>
+                                    <span id="settingsCodeTitle"></span>
+                                </button>
                             </div>
-                            <div>
-                                <a class="btn btn-sm btn-primary p-1" title="Thank you for your review!"
-                                    href="https://chromewebstore.google.com/detail/prayer-times-chrome-exten/fbkmgnkliklgbmanjkmiihkdioepnkce/reviews"
-                                    target="_blank"><img src="images/review.png" class="img-fluid p-0 m-0" /></a>
+
+                            <div class="col-2">
+                                <button id="appResetButton" title="Reset"
+                                    class="btn btn-danger p-1 text-light btn-sm col-12">
+                                    <img src="images/reset.png" class="img-fluid" />
+                                </button>
                             </div>
+
                         </div>
 
                     </div>

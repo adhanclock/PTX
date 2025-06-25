@@ -14,4 +14,4 @@ Wenn Sie an einem dedizierten Gerät interessiert sind, das Adhans ausruft, besu
 
 Wir hoffen, dass diese Erweiterung Ihnen hilft, Ihren Tag besser zu organisieren, und inshaAllah, Sie verpassen nie eines Ihrer Gebete!
 
-https://smartazanclock.com/about
+https://adhanclock.com
