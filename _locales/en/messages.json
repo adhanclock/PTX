@@ -140,7 +140,7 @@
     "description": ""
   },
   "settingsCodeInfo": {
-    "message": "Your Settings Code contains all your extension preferences at the time it was generated, including location, calculation method, custom time offsets, and adhan settings. You can use it to quickly restore your setup on a new device or share it with others. Click on the button to copy it.",
+    "message": "Settings Code contains all your preferences at the time it was generated, including location, calculation method, custom time offsets, and adhan settings. You can use it to quickly restore your setup on a new device or share it with others. Click on the button to copy it.",
     "description": ""
   },
   "copiedText": {

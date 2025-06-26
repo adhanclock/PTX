@@ -140,7 +140,7 @@
     "description": ""
   },
   "settingsCodeInfo": {
-    "message": "Ayar Kodu, oluşturulduğu andaki tüm uzantı tercihlerinizi içerir; konum, hesaplama yöntemi, özel zaman düzeltmeleri ve ezan ayarları dahil. Bu kodu, ayarlarınızı yeni bir cihazda hızlıca geri yüklemek veya başkalarıyla paylaşmak için kullanabilirsiniz. Kopyalamak için tıklayın.",
+    "message": "Ayar Kodu, oluşturulduğu andaki tüm uzantı ayarlarınızı içerir; konum, hesaplama yöntemi, özel zaman düzeltmeleri ve ezanlar dahil. Bu kodu, ayarlarınızı yeni bir cihazda hızlıca geri yüklemek veya başkalarıyla paylaşmak için kullanabilirsiniz. Kopyalamak için tıklayın.",
     "description": ""
   },
   "copiedText": {

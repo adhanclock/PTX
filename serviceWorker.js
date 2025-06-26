@@ -81,6 +81,7 @@ async function start() {
 
     appData = (await chrome.storage.local.get(['appData'])).appData ?? (await chrome.storage.local.get(['appSettings'])).appSettings;
 
+    await chrome.storage.local.remove('appSettings');
     await chrome.storage.local.set({ 'appData': appData }); /* temp renaming fix, remove later */
 
     if (appData && appData.i18n) {
@@ -140,6 +141,8 @@ async function initUser(i18nValues, appData) {
             delete appData.volume;
             delete appData.hijriDateOffset;
 
+            delete appData.r;
+            
             appData.i18n = i18nValues;
 
             if (!appData.settings.adhans) {
