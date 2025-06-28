@@ -299,6 +299,10 @@ $(function () {
         }, 2000);
     });
 
+    $("#reviewButton").click(function (e) {
+        window.open('https://chromewebstore.google.com/detail/prayer-times-chrome-exten/fbkmgnkliklgbmanjkmiihkdioepnkce/reviews');
+    });
+
     $("#audioPlayerDiv").click(function (e) {
         stopAudio();
     });
@@ -347,6 +351,12 @@ $(function () {
     let tooltipAR = bootstrap.Tooltip.getOrCreateInstance(arb, { trigger: 'hover', customClass: 'custom-red-tooltip' });
     arb.addEventListener('show.bs.tooltip', () => {
         tooltipAR._config.title = 'Reset Version ' + chrome.runtime.getManifest().version;
+    });
+
+    let rvb = document.getElementById('reviewButton');
+    let tooltipRV = bootstrap.Tooltip.getOrCreateInstance(rvb, { trigger: 'hover', customClass: 'custom-tooltip' });
+    rvb.addEventListener('show.bs.tooltip', () => {
+        tooltipRV._config.title = 'Review';
     });
 
 });
@@ -489,8 +499,8 @@ const setFields = async () => {
         const option = document.createElement('option');
         option.value = language.code;
         option.textContent = language.name;
-        if (appData.i18n.languageCode == language.code)
-            option.selected = true;
+        option.selected = appData.i18n.languageCode == language.code;
+        option.classList.add(`flag-${language.code}`)
         dispLang.appendChild(option);
     });
 
