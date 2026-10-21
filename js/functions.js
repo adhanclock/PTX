@@ -108,12 +108,28 @@ const getTotalMinutes = (t) => {
     return tt[0] * 60 + tt[1] * 1;
 }
 
-const getOffsetHoursFromTimeZone = (tz) => {
-    let date = new Date();
-    let utcDate = new Date(date.toLocaleString('en-US', { timeZone: 'UTC' }));
-    let tzDate = new Date(date.toLocaleString('en-US', { timeZone: tz }));
-    return (tzDate.getTime() - utcDate.getTime()) / 3600000;
+const getOffsetHoursFromTimeZone = (tz, date = new Date()) => {
+    // Build the zone's wall-clock time as if it were UTC and compare with the real instant.
+    // Unlike parsing formatted strings with new Date(), this doesn't depend on the device's
+    // own zone, so it stays correct around local DST transitions.
+    const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric'
+    }).formatToParts(date);
+    const v = {};
+    parts.forEach(p => { v[p.type] = +p.value; });
+    const wallAsUtc = Date.UTC(v.year, v.month - 1, v.day, v.hour, v.minute, v.second);
+    const instant = date.getTime() - date.getMilliseconds();
+    return (wallAsUtc - instant) / 3600000;
 }
+
+// Offset in effect at local noon of the given calendar date (Y/M/D taken from d's local fields),
+// so a whole day's prayer times use that day's offset, even across a DST switch.
+const getOffsetHoursForCalendarDate = (tz, d) => {
+    const utcNoon = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 12);
+    const guess = getOffsetHoursFromTimeZone(tz, new Date(utcNoon));
+    return getOffsetHoursFromTimeZone(tz, new Date(utcNoon - guess * 3600000));
+};
 const addDaysToDate = (date, number) => {
     const newDate = new Date(date);
     return new Date(newDate.setDate(newDate.getDate() + number));

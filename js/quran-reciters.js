@@ -1,8 +1,12 @@
 /* Auto-generated once from https://api.alquran.cloud/v1/edition/format/audio (type=surahbysurah, curated subset).
    To add a reciter later: paste another surahbysurah entry from that endpoint here.
-   The islamic.network CDN id is derived at runtime = identifier with a trailing '-surah' stripped. */
+   The islamic.network CDN id is derived at runtime = identifier with a trailing '-surah' stripped.
+   mp3quran.* identifiers are mapped to cdn.mp3quran.net in js/quran-shared.js (QURAN_ALT_AUDIO_BASES). */
 const quranReciters = [
     {"identifier": "ar.alafasy-surah", "language": "ar", "name": "مشاري راشد العفاسي", "englishName": "Mishary Rashid Alafasy", "format": "audio", "type": "surahbysurah"},
+    {"identifier": "mp3quran.sudais", "language": "ar", "name": "عبد الرحمن السديس", "englishName": "Abdurrahmaan As-Sudais", "format": "audio", "type": "surahbysurah"},
+    {"identifier": "mp3quran.maher", "language": "ar", "name": "ماهر المعيقلي", "englishName": "Maher Al Muaiqly", "format": "audio", "type": "surahbysurah"},
+    {"identifier": "mp3quran.mahermujawwad", "language": "ar", "name": "ماهر المعيقلي (مجوَّد)", "englishName": "Maher Al Muaiqly (Mujawwad)", "format": "audio", "type": "surahbysurah"},
     {"identifier": "ar.abdulbasitmurattal-surah", "language": "ar", "name": "عبد الباسط عبد الصمد (مرتَّل)", "englishName": "Abdul Basit Abdus-Samad (Murattal)", "format": "audio", "type": "surahbysurah"},
     {"identifier": "ar.abdulbasitmujawwad", "language": "ar", "name": "عبد الباسط عبد الصمد (مجوَّد)", "englishName": "Abdul Basit Abdus-Samad (Mujawwad)", "format": "audio", "type": "surahbysurah"},
     {"identifier": "ar.adilkalbani","language": "ar","name": "عادل الكلباني","englishName": "Adil al-Kalbani","format": "audio","type": "surahbysurah","direction": null},

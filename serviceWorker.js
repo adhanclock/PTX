@@ -390,7 +390,7 @@ function populateVakitsAndVars() {
 
     currentTime = new Date(new Date().toLocaleString("en-US", { timeZone: appData.settings.timeZoneID }));
     currentTimeString = currentTime.getHours() + ':' + fillInZeros(currentTime.getMinutes());
-    prayerTimes = prayTimes.getTimes(currentTime, [appData.settings.lat, appData.settings.lng, 0], getOffsetHoursFromTimeZone(appData.settings.timeZoneID), 0, '24h');
+    prayerTimes = prayTimes.getTimes(currentTime, [appData.settings.lat, appData.settings.lng, 0], getOffsetHoursForCalendarDate(appData.settings.timeZoneID, currentTime), 0, '24h');
 
     appData.timeNow24 = currentTimeString;
     appData.timeNow = format12(currentTimeString);
@@ -983,6 +983,14 @@ function minutesUntilNextAlarm(a) {
     return Infinity;
 }
 
+/* Dot shown only while the alarm is still ahead in the current half of the day
+   (am/pm of the alarm matches now) and due within 12h, so e.g. a 9:30am alarm
+   isn't drawn at 9:33pm as if it had just passed. */
+function alarmMarkerVisible(a) {
+    let sameHalf = (a.time.split(':')[0] * 1 < 12) === (currentTime.getHours() < 12);
+    return sameHalf && minutesUntilNextAlarm(a) <= 720;
+}
+
 function markAlarms(canvas, r) {
 
     let alarms = appData.settings.alarms || [];
@@ -997,7 +1005,7 @@ function markAlarms(canvas, r) {
        the exact same spot. Only show the dot while the alarm is the next thing due
        within 12h, so its position always matches when it will actually ring. */
     alarms.forEach((a) => {
-        if (minutesUntilNextAlarm(a) <= 720)
+        if (alarmMarkerVisible(a))
             drawIndicator(canvas, markerRadius, timeToRadians(a.time, 12), '#ffc107');
     });
 
@@ -1023,7 +1031,7 @@ function markAlarms(canvas, r) {
             let addMinutes = a.when === 'before' ? -a.minutes : a.minutes;
             let naflTime = addMinutesToTime(base, addMinutes);
             /* Nafl alarms ring every day (see checkAlarms), so apply the same 12h window. */
-            if (minutesUntilNextAlarm({ time: naflTime, frequency: 'E' }) <= 720)
+            if (alarmMarkerVisible({ time: naflTime, frequency: 'E' }))
                 drawIndicator(canvas, markerRadius, timeToRadians(naflTime, 12), '#198754');
         });
     }
@@ -1232,6 +1240,7 @@ async function quranPersistProgress(p) {
     if (!p) return;
     const r = await chrome.storage.local.get(['quranState']);
     const state = r.quranState || {};
+    if (p.cue && (state.isPlaying || state.currentSurah !== p.surah)) return;   /* stale cue: user moved on */
     if (p.surah) state.currentSurah = p.surah;
     state.currentTime = p.currentTime || 0;
     if (p.duration && isFinite(p.duration) && p.duration > 0) state.duration = p.duration;
@@ -1290,8 +1299,11 @@ async function quranStopAdhanForPlay() {
     await chrome.storage.local.set({ 'adhanStatus': adhanStatus });
 }
 
+const QURAN_PREV_RESTART_BUFFER = 3;   /* seconds */
 async function quranStep(delta) {
     const { state } = await quranGetContext();
+    /* Back past the first few seconds restarts this surah (keeps playing if it was); only near 0:00 does it go to the previous one */
+    if (delta < 0 && (state.currentTime || 0) > QURAN_PREV_RESTART_BUFFER) { await quranSeek(0); return; }
     const next = (state.currentSurah || 1) + delta;
     if (next < 1 || next > QURAN_SURAH_COUNT) return;        /* clamp at the ends */
     await quranSelectSurah(next);
@@ -1307,6 +1319,10 @@ async function quranSelectSurah(surah) {
     if (surah > QURAN_SURAH_COUNT) surah = QURAN_SURAH_COUNT;
     await quranSetState({ currentSurah: surah, currentTime: 0, duration: 0, isPlaying: false });
     chrome.runtime.sendMessage({ quranStopAudio: true }).catch(() => { });
+    /* learn the surah's length now so the seek bar shows 0:00 / total instead of 0:00 / 0:00 */
+    const { quran } = await quranGetContext();
+    await createOffscreen();
+    chrome.runtime.sendMessage({ quranCue: { src: quranSurahAudioUrl(surah, quranReciter(quran)), surah } }).catch(() => { });
 }
 
 async function quranSeek(seconds) {

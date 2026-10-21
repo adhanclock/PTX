@@ -16,7 +16,17 @@ function quranReciterCdnId(identifier) {
     return (identifier && identifier.endsWith('-surah')) ? identifier.slice(0, -6) : identifier;
 }
 
+/* Reciters not surah-by-surah on islamic.network are served from mp3quran.net instead:
+   {base}/{NNN}.mp3 (zero-padded surah number). Keyed by the reciter identifier in quran-reciters.js. */
+const QURAN_ALT_AUDIO_BASES = {
+    'mp3quran.sudais': 'https://cdn.mp3quran.net/audio/abdulrahman-sudais/r1/',
+    'mp3quran.maher': 'https://cdn.mp3quran.net/audio/maher-muaiqly/r1/',
+    'mp3quran.mahermujawwad': 'https://cdn.mp3quran.net/audio/maher-muaiqly/r3/'
+};
+
 function quranSurahAudioUrl(surahNumber, reciterIdentifier) {
+    const alt = QURAN_ALT_AUDIO_BASES[reciterIdentifier];
+    if (alt) return alt + String(surahNumber).padStart(3, '0') + '.mp3';
     return QURAN_AUDIO_BASE + quranReciterCdnId(reciterIdentifier) + '/' + surahNumber + '.mp3';
 }
 

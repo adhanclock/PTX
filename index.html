@@ -28,7 +28,7 @@
 
                 <div class="d-flex flex-row justify-content-between align-items-center">
 
-                    <div class="d-flex flex-row justify-content-center align-items-center menu-row">
+                    <div class="menu-row">
                         <div id="menu-div-clock" class="menu-div bg-secondary pointerOn rounded">
                             <img class="menu-img menu-clock-img" />
                         </div>
@@ -47,8 +47,16 @@
                         <div id="menu-div-calendar" class="menu-div menu-calendar pointerOn rounded">
                             <img class="menu-img" src="images/calendar.svg" />
                         </div>
+                        <div id="menu-div-salawat" class="menu-div menu-salawat pointerOn rounded" title="Salawat">
+                            <img class="menu-img salawat-menu-icon" src="images/salawat.svg" />
+                        </div>
                         <div id="menu-div-quran" class="menu-div menu-quran pointerOn rounded">
                             <img class="menu-img quran-menu-icon" src="images/quran.svg" />
+                        </div>
+                    </div>
+
+                    <div class="menu-end">
+                        <div id="addressMenuText" class="menu-text badge bg-light text-dark menu-settings pointerOn">
                         </div>
                         <button id="quranHeaderToggle" type="button" class="quran-header-toggle"
                             aria-label="Play or pause Qur'an" title="Qur'an"><svg class="qicon qplay"
@@ -56,18 +64,12 @@
                                     d="M8 5v14l11-7z" /></svg><svg class="qicon qpause" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24" fill="currentColor"><path
                                     d="M6 5h4v14H6zM14 5h4v14h-4z" /></svg></button>
-                    </div>
-
-                    <div id="stopAdhanDiv" class="pointerOn" style="display:none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path
-                                d="M6 5h4v14H6zM14 5h4v14h-4z" /></svg>
-                    </div>
-
-                    <div class="d-flex flex-row align-items-center justify-content-end gap-1">
-                        <div id="addressMenuText" class="menu-text badge bg-light text-dark menu-settings pointerOn">
+                        <div id="stopAdhanDiv" class="pointerOn" style="display:none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path
+                                    d="M6 5h4v14H6zM14 5h4v14h-4z" /></svg>
                         </div>
                         <span class="adhansToggle pointerOn d-flex align-items-center"
-                            title="Azan audio on / off — tap to change" style="line-height:1; padding-left:2px;">
+                            title="Azan audio on / off — tap to change" style="line-height:1;">
                             <img class="adhan-on" src="images/audio-on.png" style="height:18px; display:none;" />
                             <img class="adhan-off" src="images/audio-off.png" style="height:18px; display:none;" />
                         </span>
@@ -389,6 +391,41 @@
                             <img src="images/zakattracker-logo.png" alt="ZakatTracker" class="info-link-logo-sm" />
                             <div class="info-link-title">Calculate and track your zakat easily<span class="info-link-sub">ZakatTracker.com</span></div>
                         </a>
+                    </div>
+                </div>
+
+                <div id="salawatTab" class="tabDiv h-100" style="display:none;">
+                    <div class="salawat-wrap d-flex flex-column h-100">
+                        <div class="salawat-card">
+                            <div class="salawat-asma-row">
+                                <button id="salawatPrevBtn" type="button" class="quran-disp-nav quran-disp-prev salawat-arrow" aria-label="Previous" title="Previous"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="salawatArrowGoldL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdeeb8"/><stop offset="0.55" stop-color="#e7cf86"/><stop offset="1" stop-color="#d4af37"/></linearGradient></defs><path d="M16 3 6.9 11.3Q6.2 12 6.9 12.7L16 21 11.6 12Z" fill="url(#salawatArrowGoldL)"/></svg></button>
+                                <div id="salawatAsma" class="salawat-asma" style="display:none;"></div>
+                                <button id="salawatNextBtn" type="button" class="quran-disp-nav quran-disp-next salawat-arrow" aria-label="Next" title="Next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="salawatArrowGoldR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdeeb8"/><stop offset="0.55" stop-color="#e7cf86"/><stop offset="1" stop-color="#d4af37"/></linearGradient></defs><path d="M8 3 17.1 11.3Q17.8 12 17.1 12.7L8 21 12.4 12Z" fill="url(#salawatArrowGoldR)"/></svg></button>
+                            </div>
+                            <div id="salawatScroll" class="salawat-scroll csb">
+                                <div id="salawatArabic" class="salawat-arabic" dir="rtl" lang="ar"></div>
+                                <div id="salawatCheckRow" class="quran-check-row" style="display:none;">
+                                    <span class="quran-check-center">
+                                        <span id="salawatCheck" class="quran-name-check" role="button" aria-label="Mark as read" title="Mark as read"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span>
+                                    </span>
+                                </div>
+                                <div id="salawatMore" class="salawat-more" style="display:none;">
+                                    <div id="salawatTranslit" class="salawat-translit" dir="ltr"></div>
+                                    <div id="salawatEn" class="salawat-en" dir="ltr"></div>
+                                </div>
+                                <div id="salawatStatus" class="salawat-status"></div>
+                            <div class="salawat-foot d-flex flex-row align-items-center justify-content-between">
+                                <div class="salawat-nav d-flex flex-row">
+                                    <button id="salawatTranslitToggle" type="button" class="salawat-nav-btn salawat-toggle on" aria-pressed="true" aria-label="Transliteration" title="Transliteration">Aa</button>
+                                    <button id="salawatEnToggle" type="button" class="salawat-nav-btn salawat-toggle on" aria-pressed="true" aria-label="English translation" title="English translation">EN</button>
+                                </div>
+                                <div class="salawat-nav d-flex flex-row">
+                                    <button id="salawatReset" type="button" class="salawat-nav-btn" aria-label="Reset progress" title="Reset progress"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+                                    <a id="salawatSource" class="salawat-nav-btn" target="_blank" rel="noopener" href="#" style="display:none;" aria-label="Source" title="Source"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

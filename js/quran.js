@@ -77,6 +77,20 @@ chrome.runtime.onMessage.addListener((msg) => {
         qap.play().catch(() => { });
         quranLastProgressWrite = Date.now();
     }
+    else if (msg.quranCue) {
+        /* metadata-only probe on a throwaway element so the main player is left untouched */
+        const { src, surah } = msg.quranCue;
+        const probe = new Audio();
+        probe.preload = 'metadata';
+        probe.addEventListener('loadedmetadata', () => {
+            if (isFinite(probe.duration) && probe.duration > 0) {
+                quranPostToSW({ quranProgress: { surah, currentTime: 0, duration: probe.duration, isPlaying: false, cue: true } });
+            }
+            probe.removeAttribute('src');
+            probe.load();
+        });
+        probe.src = src;
+    }
     else if (msg.quranResume) {
         const t = msg.quranResume && msg.quranResume.startTime;   /* rewound spot after an adhan/alarm */
         if (typeof t === 'number' && isFinite(t)) {

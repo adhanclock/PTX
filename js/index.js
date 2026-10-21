@@ -218,6 +218,34 @@ $(function () {
         renderQuranPlayer();
     });
 
+    /* --- Salawat tab --- */
+    $(".menu-salawat").click(function (e) {
+        $('.menu-div').removeClass('bg-secondary');
+        $('#menu-div-salawat').addClass('bg-secondary');
+        $('.tabDiv').hide();
+        $('#salawatTab').show();
+        $('#footer').hide();
+        salawatShowInitial();   /* normally already done by the preload below */
+    });
+    chrome.storage.local.get(['salawatPrefs', 'salawatLast', 'salawatRead'], (r) => {
+        Object.assign(salawatPrefs, r.salawatPrefs || {});
+        salawatLast = r.salawatLast || null;
+        salawatRead = r.salawatRead || {};
+        salawatApplyPrefs();
+        salawatShowInitial();   /* preload now so the tab is already filled when opened */
+    });
+    $('#salawatCheck').click(salawatToggleRead);
+    $('#salawatReset').click(salawatReset);
+    /* tint the top menu bar green while the Salawat tab is open */
+    $(document).on('click', () => setTimeout(() => $('#topCard').toggleClass('salawat-active', $('#salawatTab').is(':visible')), 0));   /* any tab switch, incl. the address badge */
+    $('#salawatTranslitToggle').click(() => salawatTogglePref('translit'));
+    $('#salawatEnToggle').click(() => salawatTogglePref('en'));
+    $('#salawatPrevBtn').click(() => salawatLoad('previous'));
+    $('#salawatNextBtn').click(() => salawatLoad('next'));
+    salawatUpdateConnectivity();
+    window.addEventListener('online', salawatUpdateConnectivity);
+    window.addEventListener('offline', salawatUpdateConnectivity);
+
     $('#quranToggleBtn').click(() => quranSend({ quranToggle: true }));
     $('#quranPrevBtn').click(() => quranSend({ quranPrev: true }));
     $('#quranNextBtn').click(() => quranSend({ quranNext: true }));
@@ -452,10 +480,6 @@ $(function () {
         }, 2000);
     });
 
-    $("#audioPlayerDiv").click(function (e) {
-        stopAudio();
-    });
-
     $("#showAlarmFormBtn").click(showAlarmForm);
     $("#alarmFormBackBtn").click(showAlarmList);
     $("#addAlarmButton").click(addAlarm);
@@ -465,6 +489,7 @@ $(function () {
     });
 
     $("#stopAdhanDiv").click(() => {
+        if (!audioPlayer.paused) { stopAudio(); return; }   /* previewing an adhan sound in settings */
         navigator.serviceWorker.controller.postMessage({ endAdhanCall: true });
     });
 
@@ -516,7 +541,9 @@ document.addEventListener('click', function (event) {
 
     const playBtn = event.target && event.target.closest && event.target.closest('.playAudioButton');
     if (playBtn) {
-        playAudio(appData.settings.adhans[playBtn.dataset.vakit]);
+        /* the button of the sound that is playing shows pause and stops it; any other starts its own */
+        if (!audioPlayer.paused && previewVakit === playBtn.dataset.vakit) stopAudio();
+        else playAudio(appData.settings.adhans[playBtn.dataset.vakit], playBtn.dataset.vakit);
     }
 
     if (event.target && event.target.classList.contains('adhanRecitorBtn')) {
@@ -561,8 +588,17 @@ function volumeFillBar(range) {
     range.style.setProperty('--vol-pct', pct + '%');
 }
 
+/* push a new level to whatever is playing right now - the popup's adhan preview, the adhan
+   call and the Qur'an (both in the offscreen doc) - without interrupting it */
+function volumeApplyLive(level) {
+    audioPlayer.volume = level / 10;
+    chrome.runtime.sendMessage({ volume: level }).catch(() => { });          /* adhan call player (js/adhan.js) */
+    chrome.runtime.sendMessage({ quranVolume: level }).catch(() => { });    /* Qur'an player (js/quran.js) */
+}
+
 document.getElementById('volume').addEventListener('input', function (event) {
     volumeFillBar(event.target);   /* grow the blue fill live while dragging */
+    volumeApplyLive(event.target.value * 1);
 });
 
 document.getElementById('volume').addEventListener('change', function (event) {
@@ -570,8 +606,9 @@ document.getElementById('volume').addEventListener('change', function (event) {
         appData = result.appData;
         appData.settings.volume = event.target.value * 1;
         saveAppDataAndRefresh(appData);
-        quranSend({ quranSetVolume: appData.settings.volume });   /* live volume for Qur'an playback */
-        playAudio(102);
+        volumeApplyLive(appData.settings.volume);
+        /* the sample sound is only for confirming the level; skip it when something is already playing (it would interrupt it) */
+        if (audioPlayer.paused && !quranBase.playing && !adhanStatus.isBeingCalled) playAudio(102);
     });
 });
 
@@ -584,9 +621,7 @@ const saveAppDataAndRefresh = (appData) => {
 
 const setFields = async () => {
 
-    $('#stopAdhanDiv').hide();
-    if (adhanStatus.isBeingCalled)
-        $('#stopAdhanDiv').show();
+    $('#stopAdhanDiv').toggle(!!adhanStatus.isBeingCalled || !audioPlayer.paused);   /* also shown while an adhan sound is being previewed */
 
     /* the adhan and Qur'an share the offscreen audio, so hide the header Qur'an play/pause
        toggle while an adhan is being called (the red stop-adhan button takes its place) */
@@ -599,7 +634,9 @@ const setFields = async () => {
         $('#address').val(appData.settings.address);
 
     let topAddressMaxLen = 10;
-    let topAddress = appData.settings.address.substring(0, topAddressMaxLen).trimEnd() + ((appData.settings.address.length > topAddressMaxLen) ? '…' : '');
+    /* no ellipsis when the cut lands on a word boundary (e.g. "Rochester NY" -> "Rochester") */
+    let cutAtWordEnd = appData.settings.address.length > topAddressMaxLen && /\s/.test(appData.settings.address.charAt(topAddressMaxLen)) || /\s$/.test(appData.settings.address.substring(0, topAddressMaxLen));
+    let topAddress = appData.settings.address.substring(0, topAddressMaxLen).trimEnd() + ((appData.settings.address.length > topAddressMaxLen && !cutAtWordEnd) ? '…' : '');
     $('#addressMenuText').html(topAddress);
     $('.timeNowTitle').html(appData.timeNow).attr('title', 'Current Time in ' + appData.settings.timeZoneID);
     const calculationMethodEl = document.getElementById('calculationMethod');
@@ -811,7 +848,7 @@ const displayAdhansAndOffsets = () => {
             aoContent += "</select>";
             aoContent += "</div>";
 
-            aoContent += `<div><button type="button" class="playAudioButton${audioPlayer.paused ? '' : ' playing'}" data-vakit="${v}" data-title="${thisAudioTitle}">`
+            aoContent += `<div><button type="button" class="playAudioButton${!audioPlayer.paused && previewVakit === v ? ' playing' : ''}" data-vakit="${v}" data-title="${thisAudioTitle}">`
                 + `<svg class="aicon aplay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>`
                 + `<svg class="aicon apause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z" /></svg>`
                 + `</button></div>`;
@@ -863,20 +900,26 @@ const displayAdhansAndOffsets = () => {
 
 }
 
-const playAudio = (id) => {
-    quranSend({ quranPauseOnly: true });   /* previewing an adhan sound stops Qur'an playback first */
+let previewVakit = null;   /* vakit whose adhan sound is being previewed (null for the volume-slider sound) */
+
+const playAudio = (id, vakit) => {
+    quranSend({ quranPauseOnly: true });   /* previewing an adhan sound stops Qur'an playback first (this also calls stopAudio when a preview is already playing, hence previewVakit is set after) */
+    previewVakit = vakit || null;
     audioPlayer.src = '/adhans/' + id + '.mp3';
     audioPlayer.volume = appData.settings.volume / 10;
-    $('.playAudioButton').addClass('playing');
+    $('.playAudioButton').removeClass('playing').filter((i, b) => b.dataset.vakit === previewVakit).addClass('playing');
     audioPlayer.play();
     $('#audioPlayerDiv').show();
+    $('#stopAdhanDiv').show();   /* the header pause button stops the preview */
 }
 
 const stopAudio = () => {
+    previewVakit = null;
     audioPlayer.pause();
     audioPlayer.currentTime = 0;
     $('.playAudioButton').removeClass('playing');
     $('#audioPlayerDiv').hide();
+    $('#stopAdhanDiv').toggle(!!adhanStatus.isBeingCalled);
 }
 
 audioPlayer.onended = () => {
@@ -1483,10 +1526,11 @@ let quranTitleShown = false;     /* skip the fade on the first render (no animat
 
 /* ---- pickers (surah + reciter), full-card overlays ---- */
 
-/* Reciters with the favourited ones first (each group keeps the source list's order), so
-   hearted reciters float to the top of the picker. */
+/* Reciters ordered by name (A-Z), with the favourited ones first so hearted reciters
+   float to the top of the picker. */
 function quranSortedReciters() {
-    const reciters = (typeof quranReciters !== 'undefined') ? quranReciters : [];
+    const reciters = ((typeof quranReciters !== 'undefined') ? quranReciters : [])
+        .slice().sort((a, b) => a.englishName.localeCompare(b.englishName, 'en', { sensitivity: 'base' }));
     const fav = [], rest = [];
     reciters.forEach(r => (quranFavReciters.has(r.identifier) ? fav : rest).push(r));
     return fav.concat(rest);
@@ -1688,6 +1732,134 @@ function quranUpdateConnectivity() {
     if (menu) menu.classList.toggle('quran-offline-hidden', !online);
     if (toggle) toggle.classList.toggle('quran-offline-hidden', !online);
     if (!online && $('#quranTab').is(':visible')) $('#menu-div-clock').click();
+}
+
+/* ---- Salawat tab: one salawat at a time from smartazanclock.com/salawat (json: id, title, arabic).
+   ?id=<current>&go=next|previous returns the neighbour (the server wraps around at either end). ---- */
+const SALAWAT_URL = 'https://smartazanclock.com/salawat';
+let salawatCurrent = null;
+let salawatLast = null;      /* last salawat viewed, persisted so the tab resumes there */
+let salawatRead = {};        /* { id: true } for salawat the user marked as read */
+let salawatReq = 0;
+
+/* resume where the user left off (from storage, no network); if that one is marked read, or there is
+   none yet, fetch the next/first. Runs once, at popup load, so opening the tab shows content at once. */
+function salawatShowInitial() {
+    if (salawatCurrent || salawatReq) return;
+    if (salawatLast) {
+        salawatRender(salawatLast);
+        if (salawatRead[salawatLast.id]) salawatLoad('next');
+    } else salawatLoad(null);
+}
+
+function salawatRender(d) {
+    salawatCurrent = d;
+    const len = (d.arabic || '').length;
+    $('#salawatArabic').text((d.arabic || '').trim())
+        .toggleClass('salawat-xl', len < 260).toggleClass('salawat-md', len >= 260 && len < 520).toggleClass('salawat-sm', len >= 520);
+    $('#salawatStatus').hide();
+    salawatRenderExtras(d);
+    salawatRenderCheck();
+    $('#salawatCheckRow').show();
+    $('#salawatScroll').scrollTop(0);
+    $('.salawat-card').removeClass('salawat-out');
+}
+
+/* start over: forget every salawat marked as read and the saved position, then load the first one */
+function salawatReset() {
+    salawatRead = {};
+    salawatLast = null;
+    salawatCurrent = null;
+    chrome.storage.local.remove(['salawatRead', 'salawatLast']);
+    salawatLoad(null);
+}
+
+function salawatRenderCheck() {
+    const done = !!(salawatCurrent && salawatRead[salawatCurrent.id]);
+    $('#salawatCheck').toggleClass('done', done).attr('title', done ? 'Read' : 'Mark as read').attr('aria-label', done ? 'Read' : 'Mark as read');
+}
+
+function salawatToggleRead() {
+    if (!salawatCurrent) return;
+    const id = salawatCurrent.id;
+    if (salawatRead[id]) delete salawatRead[id]; else salawatRead[id] = true;
+    chrome.storage.local.set({ salawatRead: Object.assign({}, salawatRead) });
+    salawatRenderCheck();
+}
+
+function salawatLoad(go) {
+    const req = ++salawatReq;
+    let url = SALAWAT_URL;
+    if (go && salawatCurrent) url += '?id=' + encodeURIComponent(salawatCurrent.id) + '&go=' + go;
+    $('#salawatStatus').text('…').show();
+    $('.salawat-nav-btn').prop('disabled', true);
+    $('.salawat-card').addClass('salawat-out');
+    const fadeOut = new Promise(res => setTimeout(res, 200));   /* let the old text finish fading before it is swapped */
+    fetch(url).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => fadeOut.then(() => d)).then(d => {
+        if (req !== salawatReq) return;
+        salawatRender(d);
+        salawatLast = d;
+        chrome.storage.local.set({ salawatLast: d });
+    }).catch(() => {
+        if (req !== salawatReq) return;
+        $('#salawatStatus').text('⚠').show();
+        $('.salawat-card').removeClass('salawat-out');
+    }).finally(() => {
+        if (req === salawatReq) $('.salawat-nav-btn').prop('disabled', false);
+    });
+}
+
+/* transliteration / English can each be switched off from the footer; the choice persists */
+const salawatPrefs = { translit: true, en: true };
+
+function salawatApplyPrefs() {
+    const d = salawatCurrent || {};
+    const showTr = salawatPrefs.translit && !!d.transliteration;
+    const showEn = salawatPrefs.en && !!d.en;
+    $('#salawatTranslit').text(d.transliteration || '').toggle(showTr);
+    $('#salawatEn').text(d.en || '').toggle(showEn);
+    $('#salawatMore').toggle(showTr || showEn);
+    $('#salawatTranslitToggle').toggleClass('on', salawatPrefs.translit).attr('aria-pressed', salawatPrefs.translit);
+    $('#salawatEnToggle').toggleClass('on', salawatPrefs.en).attr('aria-pressed', salawatPrefs.en);
+}
+
+function salawatTogglePref(key) {
+    salawatPrefs[key] = !salawatPrefs[key];
+    chrome.storage.local.set({ salawatPrefs: Object.assign({}, salawatPrefs) });
+    salawatApplyPrefs();
+}
+
+/* names of Allah (asma / asma_en: comma-separated, same order) as ornamental plaques, then
+   transliteration, English and the source link. All text goes in via .text() — it is server data. */
+function salawatRenderExtras(d) {
+    const split = (v) => (v || '').split(/[,،]/).map(x => x.trim()).filter(Boolean);
+    const names = split(d.asma_ar), namesEn = split(d.asma_en), namesTr = split(d.asma);   /* asma = transliteration of the names */
+    const $asma = $('#salawatAsma').empty();
+    const title = (d.title || '').trim();
+    $('.salawat-asma-row').toggleClass('title-only', !names.length);   /* tighter row when only the title is shown */
+    if (names.length && title) $asma.append($('<div class="salawat-asma-title small"></div>').text(title));   /* with asma: a small title line above the names */
+    names.forEach((n, i) => {
+        const $p = $('<div class="salawat-asma-name"></div>').append($('<div class="salawat-asma-ar" dir="rtl" lang="ar"></div>').text(n));
+        if (namesTr.length === names.length) $p.append($('<div class="salawat-asma-tr"></div>').text(namesTr[i]));
+        if (namesEn.length === names.length) $p.append($('<div class="salawat-asma-en"></div>').text(namesEn[i]));
+        $asma.append($p);
+    });
+    if (!names.length && title) $asma.append($('<div class="salawat-asma-title"></div>').text(title));   /* no asma: the title takes the asma row */
+    $asma.toggle(names.length > 0 || !!title);
+
+    salawatApplyPrefs();
+
+    let host = '';
+    try { const u = new URL(d.link); if (u.protocol === 'https:') host = u.hostname.replace(/^www\./, ''); } catch (e) { }
+    $('#salawatSource').toggle(!!host).attr('href', host ? d.link : '#');
+    if (host) $('#salawatSource').attr('title', host);
+}
+
+/* the salawat come from the network, so hide the tab icon while offline (like the Qur'an tab) */
+function salawatUpdateConnectivity() {
+    const online = navigator.onLine;
+    $('#menu-div-salawat').toggleClass('quran-offline-hidden', !online);
+    if (!online && $('#salawatTab').is(':visible')) $('#menu-div-clock').click();
 }
 
 /* ---- khatm progress bar (images/quran-progress.svg fetched once, segments flipped) ---- */
