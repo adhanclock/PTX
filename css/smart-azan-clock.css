@@ -2197,7 +2197,7 @@ body {
 
 .salawat-arabic {
     font-family: 'UthmanicHafs', 'Amiri', 'Scheherazade New', 'Al Bayan', 'Geeza Pro', 'Noto Naskh Arabic', serif;
-    font-size: 19px;
+    font-size: 23px;
     line-height: 2.1;
     text-align: center;
     white-space: pre-line;
@@ -2209,9 +2209,9 @@ body {
 
 #salawatCheckRow { margin-top: 10px; }
 
-.salawat-arabic.salawat-xl { font-size: 26px; }
-.salawat-arabic.salawat-md { font-size: 22px; }
-.salawat-arabic.salawat-sm { font-size: 19px; }
+.salawat-arabic.salawat-xl { font-size: 31px; }
+.salawat-arabic.salawat-md { font-size: 27px; }
+.salawat-arabic.salawat-sm { font-size: 23px; }
 .salawat-arabic:empty { display: none; }
 
 .salawat-status {
@@ -2286,7 +2286,7 @@ body {
 
 .salawat-asma-ar {
     font-family: 'UthmanicHafs', 'Amiri', 'Scheherazade New', 'Al Bayan', 'Geeza Pro', 'Noto Naskh Arabic', serif;
-    font-size: 24px;
+    font-size: 28px;
     line-height: 2;
     background: linear-gradient(180deg, #fdeeb8 0%, #e7cf86 55%, #d4af37 100%);
     -webkit-background-clip: text;
