@@ -657,7 +657,7 @@ const setFields = async () => {
     $('#hour24Switch').toggleClass('on', appData.settings.timeFormat != 12);
 
     $('.lastHourHilite').hide();
-    if (appData.settings.isLastHour) {
+    if (appData.isLastHour) {
         if (appData.lastHourHilite == 0) {
             $('#lastHourHiliteOff').show();
         }

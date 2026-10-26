@@ -60,16 +60,21 @@ body {
     background: #ced4da;
 }
 
+.clock-wrap {
+    display: inline-block;
+    line-height: 0;
+}
+
 #clock {
-    max-height: 196px;
+    max-height: 204px;
     pointer-events: none;
     user-select: none;
 }
 
 #iconImg,
 #barImg {
-    height: 42px;
-    width: 42px;
+    height: 34px;
+    width: 34px;
 }
 
 .menu-img {
@@ -447,6 +452,22 @@ body {
 #googleMapsButton {
     padding-top: 2px;
     padding-bottom: 2px;
+}
+
+/* ...and stretch them to exactly the textbox's height (the row's items stretch; the buttons sit in
+   wrapper divs, so make those flex too and the buttons fill them). */
+#addressForm > .d-flex > div {
+    display: flex;
+}
+
+#addressButton,
+#googleMapsButton {
+    height: auto;
+    width: 32px;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 #addAlarmButton,
@@ -967,6 +988,7 @@ body {
    Grouped in a subtle rounded panel so it reads as one distinct block (matches .quran-playback). */
 .quran-display {
     position: relative;   /* anchor the flanking prev / next surah arrows */
+    min-height: 221px;    /* the filled-in height, reserved up front so the centred arrows don't slide down when the surah text arrives */
     padding: 12px 14px;
     text-align: center;
     background: rgba(255, 255, 255, 0.03);
@@ -1103,7 +1125,7 @@ body {
 }
 
 .quran-display.quran-anim {
-    animation: quranTitleIn 0.45s ease both;
+    animation: none;   /* surah changes swap instantly, no fade */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1233,7 +1255,7 @@ body {
     border-radius: 999px;
     border: 1px solid #3a424b;
     background:
-        linear-gradient(#2ee06a, #1ea34d) 0 / var(--quran-pct, 0%) 100% no-repeat,
+        linear-gradient(#3aa862, #2c8a4f) 0 / var(--quran-pct, 0%) 100% no-repeat,
         #2a2f34;                /* same dark surface as the transport pill; bright green fill stays distinct */
 }
 
@@ -1244,14 +1266,14 @@ body {
     height: 14px;
     margin-top: -3px;           /* center the 14px thumb over the 12px track box */
     border-radius: 50%;
-    background: #2ee06a;
+    background: #3aa862;
     border: 2px solid rgba(255, 255, 255, 0.35);   /* soft ring — not a hard white stroke */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 }
 
 .quran-progress:hover::-webkit-slider-thumb,
 .quran-progress:focus::-webkit-slider-thumb {
-    background: #46e97e;
+    background: #4bb872;
 }
 
 /* Adhan & Qur'an volume — a blue-fill seek-style bar mirroring .quran-progress (the
@@ -1449,6 +1471,7 @@ body {
     border: 1px solid #3a424b;
     border-radius: 8px;
     padding: 4px;
+    min-height: 22px;                   /* the segmented svg is fetched after open; reserve its height so the vertically-centred stack (and the surah arrows) doesn't shift when it lands */
     overflow: hidden;
 }
 
@@ -2360,36 +2383,162 @@ html[data-theme="light"] #themeToggle .theme-icon-sun {
 .adlink {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 3px 12px 3px 4px;
-    font-size: 12px;
-    color: #ced4da;
-    background-color: #2a2f34;
-    border: 1px solid #3a424b;
-    border-radius: 8px;
+    gap: 4px;
+    padding: 2px 8px 2px 3px;
+    font-size: 10px;
+    color: #9aa0a6;
+    background-color: transparent;
+    border: 0;
+    border-radius: 6px;
     text-decoration: none;
-    transition: background-color 0.12s ease, border-color 0.12s ease;
+    transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 .adlink:hover {
     color: #fff;
-    background-color: #31373E;
-    border-color: #4a525c;
+    background-color: #2a2f34;
 }
 
 .adlink-logo {
-    width: 20px;
-    height: 20px;
-    border-radius: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
 }
 
 .adlink-arrow {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     margin-inline-start: -1px;
     opacity: 0.55;
 }
 
 .adlink:hover .adlink-arrow {
     opacity: 1;
+}
+
+/* the azanclock logo is a black glyph on transparent: lighten it on the dark theme */
+.adlink-logo[src*="azanclock"] {
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+/* address-row icon buttons: centre the glyph (an inline img otherwise rides the text baseline) */
+#addressButton img,
+#googleMapsButton img {
+    display: block;
+    margin: 0 auto;
+}
+
+/* the last-hour highlight switch is a smaller version of .px-switch */
+.lastHourHilite .px-switch {
+    width: 25px;
+    height: 14px;
+}
+
+.lastHourHilite .px-switch::after {
+    width: 10px;
+    height: 10px;
+}
+
+.lastHourHilite .px-switch.on::after {
+    transform: translateX(11px);
+}
+
+.lastHourHilite .px-switch.on {
+    background: #F20031;   /* same red as the last-hour clock highlight */
+}
+
+/* ---------- Offsets tab action buttons: muted tints rather than solid blue / red / grey ---------- */
+
+#settingsCodeButton {
+    --bs-btn-color: #8fbdf0;
+    --bs-btn-bg: #25384d;
+    --bs-btn-border-color: #34506f;
+    --bs-btn-hover-color: #b0d2f7;
+    --bs-btn-hover-bg: #2d4560;
+    --bs-btn-hover-border-color: #3f6189;
+    --bs-btn-active-color: #b0d2f7;
+    --bs-btn-active-bg: #2d4560;
+    --bs-btn-active-border-color: #3f6189;
+    --bs-btn-focus-shadow-rgb: 63, 127, 196;
+}
+
+#appResetButton {
+    --bs-btn-color: #f0a3ab;
+    --bs-btn-bg: #45282d;
+    --bs-btn-border-color: #633740;
+    --bs-btn-hover-color: #f6bcc2;
+    --bs-btn-hover-bg: #55303a;
+    --bs-btn-hover-border-color: #7a4450;
+    --bs-btn-active-color: #f6bcc2;
+    --bs-btn-active-bg: #55303a;
+    --bs-btn-active-border-color: #7a4450;
+    --bs-btn-focus-shadow-rgb: 168, 50, 62;
+}
+
+#appResetButton.text-light {
+    color: var(--bs-btn-color) !important;
+}
+
+#themeToggle {
+    --bs-btn-color: #ced4da;
+    --bs-btn-bg: #31373E;
+    --bs-btn-border-color: #3f464e;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #3b424a;
+    --bs-btn-hover-border-color: #4a525c;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #3b424a;
+    --bs-btn-active-border-color: #4a525c;
+}
+
+/* ---------- Offsets tab bottom row: language select + Settings Code / Reset / Mode buttons ----------
+   one shared look: the row stretches so every control is as tall as the select, and the buttons are
+   softly rounded, centred, with a little hover lift. */
+
+.d-flex:has(> div > #displayLanguage) {
+    align-items: stretch !important;
+}
+
+.d-flex:has(> div > #displayLanguage) > div {
+    display: flex;
+}
+
+#settingsCodeButton,
+#appResetButton,
+#themeToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: auto;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease, transform 0.12s ease;
+}
+
+#settingsCodeButton:hover,
+#appResetButton:hover,
+#themeToggle:hover {
+    transform: translateY(-1px);
+}
+
+#settingsCodeButton:active,
+#appResetButton:active,
+#themeToggle:active {
+    transform: none;
+}
+
+#settingsCodeButton svg,
+#appResetButton svg,
+#themeToggle svg {
+    flex: 0 0 auto;
+}
+
+/* "Remaining" / next-prayer title above the time box */
+#ntTitle {
+    font-size: 12px;
 }

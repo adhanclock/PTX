@@ -85,7 +85,7 @@
 
                 <div id="times" class="tabDiv text-center">
 
-                    <img class="align-center img-fluid mt-2" id="clock" />
+                    <div class="clock-wrap mt-2"><img class="align-center img-fluid" id="clock" /></div>
 
                     <div class="d-flex flex-row justify-content-center align-items-center mt-1">
                         <div>
@@ -139,9 +139,9 @@
                                     name="address" id="address" />
                             </div>
                             <div><button type="submit" id="addressButton" class="btn btn-primary btn-sm"><img
-                                        src="images/right-arrow.png" /></button></div>
+                                        src="images/right-arrow.svg" /></button></div>
                             <div><button title="Google Maps" type="button" id="googleMapsButton"
-                                    class="btn btn-secondary btn-sm"><img src="images/google-maps.png" /></button></div>
+                                    class="btn btn-secondary btn-sm"><img src="images/google-maps.svg" /></button></div>
                         </div>
                     </form>
 
@@ -161,11 +161,11 @@
                             <div class="badge px-0" id="iconTitle"></div>
 
                             <div id="lastHourHiliteOn" class="lastHourHilite badge pointerOn p-0" style="display:none;">
-                                <img src="images/hiliteOn.png" title="Last hour highlight: ON" class="rounded" />
+                                <span class="px-switch on" title="Last hour highlight: ON"></span>
                             </div>
                             <div id="lastHourHiliteOff" class="lastHourHilite badge pointerOn p-0"
                                 style="display:none;">
-                                <img src="images/hiliteOff.png" title="Last hour highlight: OFF" class="rounded" />
+                                <span class="px-switch" title="Last hour highlight: OFF"></span>
                             </div>
                         </div>
                         <div class="btn-group btn-group-sm col-12" role="group">
@@ -278,7 +278,7 @@
                             <div class="flex-fill">
                                 <button id="settingsCodeButton" title="SettingsCode"
                                     class="btn btn-sm btn-primary p-1 col-12">
-                                    <span><img src="images/copy.png" class="img-fluid" /></span>
+                                    <span class="d-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></svg></span>
                                     <span id="settingsCodeTitle"></span>
                                 </button>
                             </div>
