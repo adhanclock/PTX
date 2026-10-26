@@ -1,0 +1,251 @@
+/* Light theme. The base stylesheet (smart-azan-clock.css) is the dark theme; everything here only
+   applies when <html data-theme="light"> (set by js/theme.js from the saved choice). The Salawat tab
+   and the Qur'an khatm-congratulations overlay keep their own emerald / gold look in both themes. */
+
+html[data-theme="light"] body { background-color: #e9ecef; }
+
+/* ---- card + text ---- */
+html[data-theme="light"] #topCard { background-color: #f4f6f8 !important; color: #343a40 !important; }
+html[data-theme="light"] #topCard .text-light:not(.badge):not(.btn) { color: #212529 !important; }
+html[data-theme="light"] #topCard > .card-header { background-color: #e3e7eb; border-bottom-color: #d0d6dc; }
+html[data-theme="light"] .badge { --bs-badge-color: #212529; }
+html[data-theme="light"] .badge.text-light, html[data-theme="light"] .badge.bg-danger,
+html[data-theme="light"] .badge.bg-success, html[data-theme="light"] .badge.bg-primary { color: #fff; }
+html[data-theme="light"] .badge.bg-light { color: #212529; background-color: #fff !important; border: 1px solid #ced4da; }
+html[data-theme="light"] .csb::-webkit-scrollbar-track { background: #e3e7eb; }
+html[data-theme="light"] .csb::-webkit-scrollbar-thumb { background: #adb5bd; }
+
+/* ---- icons / clock face: the white glyphs and silver clock are inverted; hue-rotate puts the
+   accent colours (gold, red, green) back on their original hue ---- */
+html[data-theme="light"] #topCard .menu-img:not(.salawat-menu-icon):not(.menu-clock-img),
+html[data-theme="light"] #clock,
+html[data-theme="light"] .adhan-on, html[data-theme="light"] .adhan-off,
+html[data-theme="light"] #audioVolumeIcon { filter: invert(0.82) hue-rotate(180deg); }
+html[data-theme="light"] .menu-div:hover { background-color: #d0d6dc; }
+html[data-theme="light"] .menu-div.bg-secondary { background-color: #c4cbd2 !important; }
+html[data-theme="light"] #topCard.salawat-active .menu-div.bg-secondary { background-color: rgba(138, 100, 16, 0.16) !important; }
+
+/* ---- surfaces ---- */
+html[data-theme="light"] .btn-darkish, html[data-theme="light"] .badge-darkish,
+html[data-theme="light"] .bg-darkish,
+html[data-theme="light"] #alarms-tabContent,
+html[data-theme="light"] .alarm-back-btn,
+html[data-theme="light"] #alarms-tab .nav-link,
+html[data-theme="light"] .cal-title:hover { background-color: #dde1e5; }
+html[data-theme="light"] .btn-darkish { color: #212529; }
+html[data-theme="light"] .alarm-item, html[data-theme="light"] .cal-day,
+html[data-theme="light"] .cal-holyday-item { background-color: #e6e9ec; }
+html[data-theme="light"] .alarm-item:hover,
+html[data-theme="light"] .alarm-back-btn:hover,
+html[data-theme="light"] #alarms-tab .nav-link:hover { background-color: #d3d8dd; }
+html[data-theme="light"] .cal-day.other-month { background-color: transparent; }
+html[data-theme="light"] #audioPlayerDiv, html[data-theme="light"] .quran-picker { background-color: #f4f6f8; }
+html[data-theme="light"] .offsetDecrease:disabled, html[data-theme="light"] .offsetIncrease:disabled { background-color: #adb5bd; }
+html[data-theme="light"] .offsetCurrentVakit span { color: #8a6d00; }
+html[data-theme="light"] .voff { border-left-color: #adb5bd; }
+
+/* ---- text colours ---- */
+html[data-theme="light"] .alarms-header-title, html[data-theme="light"] .alarm-item-name,
+html[data-theme="light"] .cal-nav-btn, html[data-theme="light"] .cal-title .cal-title-greg,
+html[data-theme="light"] .cal-day .cal-greg, html[data-theme="light"] .cal-holyday-name, html[data-theme="light"] .quran-picker-item,
+html[data-theme="light"] .quran-srow-name { color: #212529; }
+html[data-theme="light"] .alarm-tip, html[data-theme="light"] .alarm-back-btn,
+html[data-theme="light"] #alarms-tab .nav-link,
+html[data-theme="light"] .cal-weekdays > div, html[data-theme="light"] .cal-day .cal-hijri,
+html[data-theme="light"] .cal-upcoming-title, html[data-theme="light"] .cal-holyday-dates,
+html[data-theme="light"] .cal-holyday-hijri, html[data-theme="light"] .cal-upcoming-empty,
+html[data-theme="light"] .quran-picker-head span, html[data-theme="light"] .quran-picker-item-ar,
+html[data-theme="light"] .quran-picker-close, html[data-theme="light"] .quran-srow-num,
+html[data-theme="light"] .quran-srow-ar, html[data-theme="light"] .quran-time,
+html[data-theme="light"] .quran-khatm-head, html[data-theme="light"] .quran-auto-toggle,
+html[data-theme="light"] .quran-reciter-fav { color: #5a626a; }, html[data-theme="light"] .cal-holyday-greg,
+html[data-theme="light"] .quran-nav-btn, html[data-theme="light"] .quran-skip,
+html[data-theme="light"] .quran-auto-toggle[aria-checked="true"] { color: #343a40; }
+html[data-theme="light"] .alarm-back-btn:hover, html[data-theme="light"] #alarms-tab .nav-link:hover, html[data-theme="light"] .quran-nav-btn:hover,
+html[data-theme="light"] .quran-skip:hover, html[data-theme="light"] .quran-picker-close:hover,
+html[data-theme="light"] .quran-auto-toggle:hover { color: #000; }
+html[data-theme="light"] .cal-day.other-month .cal-greg { color: #9aa1a8; }
+html[data-theme="light"] .cal-day.other-month .cal-hijri { color: #b4bac0; }
+html[data-theme="light"] .cal-holyday-greg::after { color: #9aa1a8; }
+html[data-theme="light"] .cal-title .cal-title-hijri, html[data-theme="light"] .cal-hijri-month-start .cal-hijri,
+html[data-theme="light"] .cal-day.cal-hijri-month-start .cal-hijri { color: #a06d00; }
+html[data-theme="light"] .alarm-tip { background-color: rgba(212, 175, 55, 0.14); }
+html[data-theme="light"] .alarm-tip-hr { border-top-color: rgba(0, 0, 0, 0.12); }
+html[data-theme="light"] #alarms-tab #add-alarm-tab.active { color: #000; background-color: #ffc107; }
+html[data-theme="light"] #alarms-tab #add-nafl-tab.active { color: #fff; background-color: #5a9e7a; }
+
+/* ---- alarm time pills ---- */
+html[data-theme="light"] .alarm-time { color: #8a5d00; }
+html[data-theme="light"] .alarm-time.nafl-time { color: #2f6e4d; }
+html[data-theme="light"] .alarm-time.alarm-time-off { color: #5a626a; background-color: rgba(0, 0, 0, 0.04); border-color: rgba(0, 0, 0, 0.15); }
+html[data-theme="light"] .alarm-time-sub { color: #343a40; }
+html[data-theme="light"] .alarm-time-off .alarm-time-sub { color: #6c757d; }
+html[data-theme="light"] .alarm-item-remove { background-color: rgba(0, 0, 0, 0.08); color: #5a626a; }
+html[data-theme="light"] .alarm-item-remove:hover, html[data-theme="light"] .alarm-item-remove:focus-visible { background-color: #dc3545; color: #fff; }
+
+/* ---- calendar ---- */
+html[data-theme="light"] .cal-day.today { background-color: #dce8f4; box-shadow: inset 0 0 0 1.5px #3f7fc4; }
+html[data-theme="light"] .cal-day.today .cal-greg { color: #0a2f55; }
+html[data-theme="light"] .cal-day.holyday.other-month .cal-dot { background-color: #d9c27a; }
+html[data-theme="light"] .cal-upcoming-title { border-bottom-color: rgba(0, 0, 0, 0.1); }
+html[data-theme="light"] .cal-holyday-item.is-soon { background-color: rgba(255, 193, 7, 0.2); }
+html[data-theme="light"] .cal-holyday-remaining.remaining-today { color: #fff; }
+
+/* ---- notices ---- */
+html[data-theme="light"] #calcAngleNoticeBar { background-color: #e3eefc; color: #212529; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18); }
+html[data-theme="light"] #calcAngleNoticeClose { color: #212529; }
+
+/* ---- Qur'an tab ---- */
+html[data-theme="light"] .quran-playback, html[data-theme="light"] .quran-display,
+html[data-theme="light"] .quran-khatm, html[data-theme="light"] .quran-auto-toggle {
+    background: rgba(0, 0, 0, 0.025); border-color: rgba(0, 0, 0, 0.1);
+}
+html[data-theme="light"] .quran-auto-toggle:hover { border-color: rgba(0, 0, 0, 0.2); }
+html[data-theme="light"] .quran-transport, html[data-theme="light"] .quran-khatm-bar { background: #e6e9ec; border-color: #c9cfd5; }
+html[data-theme="light"] .quran-progress::-webkit-slider-runnable-track { border-color: #c9cfd5; background: linear-gradient(#2ee06a, #1ea34d) 0 / var(--quran-pct, 0%) 100% no-repeat, #dde1e5; }
+html[data-theme="light"] .volume-range::-webkit-slider-runnable-track { border-color: #c9cfd5; background: linear-gradient(#6aa0d8, #3f7fc4) 0 / var(--vol-pct, 0%) 100% no-repeat, #dde1e5; }
+html[data-theme="light"] .quran-switch { background: #b6bdc4; }
+html[data-theme="light"] .quran-switch-knob { background: #fff; }
+html[data-theme="light"] #quranKhatmBar .surah.unread rect { fill: #c3c9d0; }
+html[data-theme="light"] .quran-disp-nav { filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)); }
+
+/* the gold-on-dark text needs a deeper gold on a light page */
+html[data-theme="light"] .quran-surah-number, html[data-theme="light"] .quran-sajda-mark,
+html[data-theme="light"] .quran-srow-sajda, html[data-theme="light"] .quran-reciter-btn { color: #8a6d1f; }
+html[data-theme="light"] .quran-mic { color: #8a6d1f; }
+html[data-theme="light"] .quran-reciter-name { color: #6f5614; }
+html[data-theme="light"] .quran-reciter-btn:hover .quran-mic, html[data-theme="light"] .quran-reciter-btn:hover .quran-reciter-name { color: #4d3a08; }
+html[data-theme="light"] .quran-surah-number::before, html[data-theme="light"] .quran-surah-number::after,
+html[data-theme="light"] .quran-check-center::before, html[data-theme="light"] .quran-check-center::after { background: #a8872f; }
+html[data-theme="light"] .quran-name-check { border-color: #a8872f; }
+html[data-theme="light"] .quran-surah-caption::before, html[data-theme="light"] .quran-check-row::before { background: linear-gradient(to right, transparent, #a8872f); }
+html[data-theme="light"] .quran-surah-caption::after, html[data-theme="light"] .quran-check-row::after { background: linear-gradient(to left, transparent, #a8872f); }
+html[data-theme="light"] .quran-surah-name, html[data-theme="light"] .quran-surah-arabic {
+    background: linear-gradient(180deg, #b8860b 0%, #8a6410 55%, #6b4c08 100%);
+    background-clip: text; -webkit-background-clip: text; color: #8a6410;
+}
+html[data-theme="light"] .quran-surah-arabic { filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12)); }
+html[data-theme="light"] .quran-reciter-fav.faved { color: #c28a00; }
+
+/* pickers (surah / reciter lists) */
+html[data-theme="light"] .quran-picker-head, html[data-theme="light"] .quran-picker-item,
+html[data-theme="light"] .quran-srow { border-bottom-color: #d3d8dd; }
+html[data-theme="light"] .quran-picker-item:hover, html[data-theme="light"] .quran-srow:hover { background: #e3e7eb; }
+html[data-theme="light"] .quran-picker-item.current { background: #cdebd8; }
+html[data-theme="light"] .quran-srow.current { background: #dbe9f3; }
+html[data-theme="light"] .quran-srow-check { border-color: #b6bdc4; }
+html[data-theme="light"] .quran-srow-check.done { border-color: #22c55e; }
+
+
+/* current prayer cell keeps its dark highlight (.bg-dark), so its text must stay light */
+html[data-theme="light"] #vakitsRow1 .bg-dark,
+html[data-theme="light"] #vakitsRow2 .bg-dark { color: #f8f9fa; }
+
+/* Qur'an surah header: a warm parchment panel, and deeper gold chevrons (the pale dark-mode gold vanishes on light) */
+html[data-theme="light"] .quran-display { background: #fbf5e2; border-color: rgba(168, 135, 47, 0.45); }
+html[data-theme="light"] .quran-reciter-btn { background: rgba(168, 135, 47, 0.1); border-color: rgba(168, 135, 47, 0.45); }
+html[data-theme="light"] #quranDispPrevBtn stop:nth-child(1), html[data-theme="light"] #quranDispNextBtn stop:nth-child(1) { stop-color: #c9a227; }
+html[data-theme="light"] #quranDispPrevBtn stop:nth-child(2), html[data-theme="light"] #quranDispNextBtn stop:nth-child(2) { stop-color: #a8821a; }
+html[data-theme="light"] #quranDispPrevBtn stop:nth-child(3), html[data-theme="light"] #quranDispNextBtn stop:nth-child(3) { stop-color: #86660e; }
+html[data-theme="light"] #quranDispPrevBtn:hover, html[data-theme="light"] #quranDispNextBtn:hover { filter: drop-shadow(0 1px 4px rgba(134, 102, 14, 0.5)); }
+html[data-theme="light"] #quranDispPrevBtn:disabled, html[data-theme="light"] #quranDispNextBtn:disabled { filter: none; opacity: 0.35; }
+
+/* same parchment treatment for the other Qur'an containers */
+html[data-theme="light"] .quran-playback, html[data-theme="light"] .quran-khatm,
+html[data-theme="light"] .quran-auto-toggle { background: #fbf5e2; border-color: rgba(168, 135, 47, 0.45); }
+html[data-theme="light"] .quran-auto-toggle:hover { border-color: rgba(168, 135, 47, 0.75); }
+html[data-theme="light"] .quran-transport, html[data-theme="light"] .quran-khatm-bar { background: #f3e9c9; border-color: rgba(168, 135, 47, 0.45); }
+html[data-theme="light"] .quran-progress::-webkit-slider-runnable-track { border-color: rgba(168, 135, 47, 0.45); background: linear-gradient(#2ee06a, #1ea34d) 0 / var(--quran-pct, 0%) 100% no-repeat, #efe3bd; }
+html[data-theme="light"] .volume-range::-webkit-slider-runnable-track { border-color: rgba(168, 135, 47, 0.45); background: linear-gradient(#6aa0d8, #3f7fc4) 0 / var(--vol-pct, 0%) 100% no-repeat, #efe3bd; }
+html[data-theme="light"] #quranKhatmBar .surah.unread rect { fill: #d9ccA0; }
+html[data-theme="light"] .quran-switch { background: #cdbf94; }
+
+/* offsets page: the current-vakit marker (.border-light) is near-white, invisible on a light surface */
+html[data-theme="light"] #adhanOffsetSettings .border-start.border-light { border-color: #3f7fc4 !important; }
+
+/* soften the near-black bits: slate instead of ink */
+html[data-theme="light"] .btn-dark { --bs-btn-bg: #5b6670; --bs-btn-border-color: #5b6670; --bs-btn-hover-bg: #4a545d; --bs-btn-hover-border-color: #4a545d; --bs-btn-active-bg: #4a545d; --bs-btn-active-border-color: #4a545d; --bs-btn-disabled-bg: #adb5bd; --bs-btn-disabled-border-color: #adb5bd; }
+html[data-theme="light"] #vakitsRow1 .bg-dark, html[data-theme="light"] #vakitsRow2 .bg-dark { background-color: #5b6670 !important; border-color: #8a949e !important; }
+html[data-theme="light"] #topCard .text-dark { color: #343a40 !important; }
+
+/* mute the saturated blues */
+html[data-theme="light"] .btn-primary { --bs-btn-bg: #3f7fc4; --bs-btn-border-color: #3f7fc4; --bs-btn-hover-bg: #336ea8; --bs-btn-hover-border-color: #336ea8; --bs-btn-active-bg: #336ea8; --bs-btn-active-border-color: #336ea8; --bs-btn-disabled-bg: #3f7fc4; --bs-btn-disabled-border-color: #3f7fc4; --bs-btn-focus-shadow-rgb: 63, 127, 196; }
+html[data-theme="light"] .offadj.currentVakit { background-color: #3f7fc4 !important; }
+html[data-theme="light"] .px-switch.on { background: #3f7fc4; }
+html[data-theme="light"] .von { border-left-color: #3f7fc4; }
+html[data-theme="light"] .custom-tooltip { --bs-tooltip-bg: #3f7fc4; }
+html[data-theme="light"] .volume-range::-webkit-slider-thumb { background: #6aa0d8; }
+html[data-theme="light"] .volume-range:hover::-webkit-slider-thumb, html[data-theme="light"] .volume-range:focus::-webkit-slider-thumb { background: #5590cc; }
+html[data-theme="light"] #calcAngleNoticeBar { border-color: #3f7fc4; }
+html[data-theme="light"] .badge.bg-primary { background-color: #3f7fc4 !important; }
+
+/* ---- Salawat tab: a sage-and-parchment page with deep green text and antique gold ---- */
+html[data-theme="light"] #topCard.salawat-active > .card-header { background: linear-gradient(180deg, #e3ebd8, #d8e3cb) !important; border-bottom: 1px solid rgba(138, 100, 16, 0.35); }
+html[data-theme="light"] #topCard.salawat-active .menu-div:hover { background-color: rgba(138, 100, 16, 0.14); }
+html[data-theme="light"] #salawatTab::before {
+    background-image:
+        radial-gradient(120% 45% at 50% -8%, rgba(255, 255, 255, 0.7), transparent 65%),
+        radial-gradient(110% 40% at 50% 108%, rgba(212, 175, 55, 0.16), transparent 65%),
+        url("../images/salawat-pattern.svg"),
+        linear-gradient(180deg, #f1f5e8 0%, #e6eedb 50%, #dbe6cd 100%);
+}
+html[data-theme="light"] #salawatTab::after { opacity: 0.1; }
+html[data-theme="light"] .salawat-card {
+    border-color: rgba(138, 100, 16, 0.5);
+    background: linear-gradient(180deg, rgba(253, 249, 235, 0.96), rgba(250, 244, 224, 0.97));
+    box-shadow: inset 0 0 0 3px rgba(250, 244, 224, 0.8), inset 0 0 0 4px rgba(138, 100, 16, 0.3), 0 2px 12px rgba(60, 70, 40, 0.18);
+}
+html[data-theme="light"] .salawat-card::after { background: linear-gradient(180deg, rgba(250, 244, 224, 0), #faf4e0); }
+html[data-theme="light"] .salawat-asma-row, html[data-theme="light"] .salawat-foot { border-color: rgba(138, 100, 16, 0.3); }
+html[data-theme="light"] .salawat-asma-row .quran-disp-nav { background: linear-gradient(135deg, rgba(138, 100, 16, 0.16), rgba(138, 100, 16, 0.04)); border-color: rgba(138, 100, 16, 0.4); }
+html[data-theme="light"] .salawat-asma-row .quran-disp-next { background: linear-gradient(225deg, rgba(138, 100, 16, 0.16), rgba(138, 100, 16, 0.04)); }
+html[data-theme="light"] .salawat-arabic { color: #1f3d2b; text-shadow: none; }
+html[data-theme="light"] .salawat-status { color: #6b7466; }
+html[data-theme="light"] .salawat-asma-name + .salawat-asma-name { border-left-color: rgba(138, 100, 16, 0.3); }
+html[data-theme="light"] .salawat-asma-ar { background: linear-gradient(180deg, #b8860b 0%, #8a6410 55%, #6b4c08 100%); background-clip: text; -webkit-background-clip: text; color: #8a6410; }
+html[data-theme="light"] .salawat-asma-en { color: #5f6650; }
+html[data-theme="light"] .salawat-asma-title, html[data-theme="light"] .salawat-asma-tr { color: #7a5a0e; }
+html[data-theme="light"] .salawat-nav-btn { background: rgba(138, 100, 16, 0.08); border-color: rgba(138, 100, 16, 0.4); color: #7a5a0e; }
+html[data-theme="light"] .salawat-nav-btn:hover:not(:disabled) { background: rgba(138, 100, 16, 0.18); color: #4d3a08; }
+html[data-theme="light"] .salawat-toggle.on { background: rgba(138, 100, 16, 0.18); border-color: rgba(138, 100, 16, 0.6); }
+html[data-theme="light"] #salawatTab .salawat-scroll::-webkit-scrollbar-track { background: rgba(138, 100, 16, 0.1); }
+html[data-theme="light"] #salawatTab .salawat-scroll::-webkit-scrollbar-thumb { background: #b79a4a; }
+html[data-theme="light"] #salawatTab .salawat-translit { color: #5a5a3c; }
+html[data-theme="light"] #salawatTab .salawat-en { color: #3f4a3a; }
+html[data-theme="light"] #salawatTab .salawat-status { color: #6b7466; }
+
+/* surah names: plain solid ink-gold instead of the gradient + glow, which looks muddy on light */
+html[data-theme="light"] .quran-surah-name, html[data-theme="light"] .quran-surah-arabic {
+    background: none; -webkit-text-fill-color: currentColor; color: #6f5214; filter: none; text-shadow: none;
+}
+
+/* remaining-time box: its inline colour is whitesmoke-on-gray (the red last-hour state is left alone) */
+html[data-theme="light"] #nextText[style*="whitesmoke"] { background-color: #5b6670 !important; color: #f8f9fa !important; }
+
+/* clock face: lighter slate lines than the icons */
+html[data-theme="light"] #clock { filter: invert(0.62) hue-rotate(180deg); }
+
+/* salawat chevrons: deeper gold arrows on a stronger quarter-circle */
+html[data-theme="light"] .salawat-arrow stop:nth-child(1) { stop-color: #b8860b; }
+html[data-theme="light"] .salawat-arrow stop:nth-child(2) { stop-color: #8a6410; }
+html[data-theme="light"] .salawat-arrow stop:nth-child(3) { stop-color: #6b4c08; }
+html[data-theme="light"] .salawat-asma-row .quran-disp-nav { background: linear-gradient(135deg, rgba(138, 100, 16, 0.34), rgba(138, 100, 16, 0.12)); border-color: rgba(138, 100, 16, 0.6); }
+html[data-theme="light"] .salawat-asma-row .quran-disp-next { background: linear-gradient(225deg, rgba(138, 100, 16, 0.34), rgba(138, 100, 16, 0.12)); }
+
+/* the offsets-page volume slider shares .volume-range with the Qur'an one: keep its track neutral grey, not parchment */
+html[data-theme="light"] #adhanOffsetSettings .volume-range::-webkit-slider-runnable-track {
+    border-color: #c0c7ce; background: linear-gradient(#6aa0d8, #3f7fc4) 0 / var(--vol-pct, 0%) 100% no-repeat, #cfd5db;
+}
+
+/* white info (i) icons */
+html[data-theme="light"] img[src$="info.png"] { filter: invert(0.62) hue-rotate(180deg); }
+
+/* Fajr / Isha angle badges: .text-light was white-on-pale-grey */
+html[data-theme="light"] .badge.bg-darkish { background-color: #d3d9df; color: #343a40 !important; }
+
+/* off-state toggle switches */
+html[data-theme="light"] .px-switch { background: #b9c0c7; }
+html[data-theme="light"] .px-switch.on { background: #3f7fc4; }
+
+html[data-theme="light"] .adlink { color: #343a40; background-color: #e6e9ec; border-color: #c9cfd5; }
+html[data-theme="light"] .adlink:hover { color: #000; background-color: #dde1e5; border-color: #b6bdc4; }
