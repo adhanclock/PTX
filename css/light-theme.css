@@ -2,16 +2,17 @@
    applies when <html data-theme="light"> (set by js/theme.js from the saved choice). The Salawat tab
    and the Qur'an khatm-congratulations overlay keep their own emerald / gold look in both themes. */
 
+html[data-theme="light"] { --surface: #f4f6f8; }   /* the one panel colour: card, header, home tab, pickers */
 html[data-theme="light"] body { background-color: #e9ecef; }
 
 /* ---- card + text ---- */
-html[data-theme="light"] #topCard { background-color: #f4f6f8 !important; color: #343a40 !important; }
+html[data-theme="light"] #topCard { background-color: var(--surface) !important; color: #343a40 !important; }
 html[data-theme="light"] #topCard .text-light:not(.badge):not(.btn) { color: #212529 !important; }
-html[data-theme="light"] #topCard > .card-header { background-color: #e3e7eb; border-bottom-color: #d0d6dc; }
+html[data-theme="light"] #topCard > .card-header { background-color: var(--surface); border-bottom-color: #d0d6dc; }
 html[data-theme="light"] .badge { --bs-badge-color: #212529; }
 html[data-theme="light"] .badge.text-light, html[data-theme="light"] .badge.bg-danger,
 html[data-theme="light"] .badge.bg-success, html[data-theme="light"] .badge.bg-primary { color: #fff; }
-html[data-theme="light"] .badge.bg-light { color: #212529; background-color: #fff !important; border: 1px solid #ced4da; }
+html[data-theme="light"] .badge.bg-light { color: #212529; background-color: #fff !important; box-shadow: inset 0 0 0 1px #ced4da; }   /* hairlines are inset shadows: a real border would make light mode taller than dark */
 html[data-theme="light"] .csb::-webkit-scrollbar-track { background: #e3e7eb; }
 html[data-theme="light"] .csb::-webkit-scrollbar-thumb { background: #adb5bd; }
 
@@ -20,10 +21,10 @@ html[data-theme="light"] .csb::-webkit-scrollbar-thumb { background: #adb5bd; }
 html[data-theme="light"] #topCard .menu-img:not(.salawat-menu-icon):not(.menu-clock-img),
 html[data-theme="light"] #clock,
 html[data-theme="light"] .adhan-on, html[data-theme="light"] .adhan-off,
+html[data-theme="light"] img[src$="mic.svg"],   /* per-vakit mics on the offsets page */
 html[data-theme="light"] #audioVolumeIcon { filter: invert(0.7) hue-rotate(180deg); }
 html[data-theme="light"] .menu-div:hover { background-color: #d0d6dc; }
-html[data-theme="light"] .menu-div.bg-secondary { background-color: #c4cbd2 !important; }
-html[data-theme="light"] #topCard.salawat-active .menu-div.bg-secondary { background-color: rgba(0, 0, 0, 0.1) !important; }
+html[data-theme="light"] .menu-div.bg-secondary { background-color: #e4e8ec !important; }
 
 /* ---- surfaces ---- */
 html[data-theme="light"] .btn-darkish, html[data-theme="light"] .badge-darkish,
@@ -39,7 +40,7 @@ html[data-theme="light"] .alarm-item:hover,
 html[data-theme="light"] .alarm-back-btn:hover,
 html[data-theme="light"] #alarms-tab .nav-link:hover { background-color: #d3d8dd; }
 html[data-theme="light"] .cal-day.other-month { background-color: transparent; }
-html[data-theme="light"] #audioPlayerDiv, html[data-theme="light"] .quran-picker { background-color: #f4f6f8; }
+html[data-theme="light"] #audioPlayerDiv, html[data-theme="light"] .quran-picker { background-color: var(--surface); }
 html[data-theme="light"] .offsetDecrease:disabled, html[data-theme="light"] .offsetIncrease:disabled { background-color: #adb5bd; }
 html[data-theme="light"] .offsetCurrentVakit span { color: #8a6d00; }
 html[data-theme="light"] .voff { border-left-color: #adb5bd; }
@@ -84,7 +85,7 @@ html[data-theme="light"] .alarm-item-remove { background-color: rgba(0, 0, 0, 0.
 html[data-theme="light"] .alarm-item-remove:hover, html[data-theme="light"] .alarm-item-remove:focus-visible { background-color: #dc3545; color: #fff; }
 
 /* ---- calendar ---- */
-html[data-theme="light"] .cal-day.today { background-color: #dce8f4; box-shadow: inset 0 0 0 1.5px #3f7fc4; }
+html[data-theme="light"] .cal-day.today { background-color: #dce8f4; box-shadow: inset 0 0 0 1.5px #6a97c9; }
 html[data-theme="light"] .cal-day.today .cal-greg { color: #0a2f55; }
 html[data-theme="light"] .cal-day.holyday.other-month .cal-dot { background-color: #d9c27a; }
 html[data-theme="light"] .cal-upcoming-title { border-bottom-color: rgba(0, 0, 0, 0.1); }
@@ -103,7 +104,7 @@ html[data-theme="light"] .quran-khatm, html[data-theme="light"] .quran-auto-togg
 html[data-theme="light"] .quran-auto-toggle:hover { border-color: rgba(0, 0, 0, 0.2); }
 html[data-theme="light"] .quran-transport, html[data-theme="light"] .quran-khatm-bar { background: #e6e9ec; border-color: #c9cfd5; }
 html[data-theme="light"] .quran-progress::-webkit-slider-runnable-track { border-color: #c9cfd5; background: linear-gradient(#3aa862, #2c8a4f) 0 / var(--quran-pct, 0%) 100% no-repeat, #dde1e5; }
-html[data-theme="light"] .volume-range::-webkit-slider-runnable-track { border-color: #c9cfd5; background: linear-gradient(#6aa0d8, #3f7fc4) 0 / var(--vol-pct, 0%) 100% no-repeat, #dde1e5; }
+html[data-theme="light"] .volume-range::-webkit-slider-runnable-track { border-color: #c9cfd5; background: linear-gradient(#86aed9, #6a97c9) 0 / var(--vol-pct, 0%) 100% no-repeat, #dde1e5; }
 html[data-theme="light"] .quran-switch { background: #b6bdc4; }
 html[data-theme="light"] .quran-switch-knob { background: #fff; }
 html[data-theme="light"] #quranKhatmBar .surah.unread rect { fill: #c3c9d0; }
@@ -153,7 +154,7 @@ html[data-theme="light"] .quran-auto-toggle { background: #ffffff; border-color:
 html[data-theme="light"] .quran-auto-toggle:hover { border-color: rgba(0, 0, 0, 0.28); }
 html[data-theme="light"] .quran-transport, html[data-theme="light"] .quran-khatm-bar { background: #eef0f2; border-color: rgba(0, 0, 0, 0.14); }
 html[data-theme="light"] .quran-progress::-webkit-slider-runnable-track { border-color: rgba(0, 0, 0, 0.14); background: linear-gradient(#3aa862, #2c8a4f) 0 / var(--quran-pct, 0%) 100% no-repeat, #dde1e5; }
-html[data-theme="light"] .volume-range::-webkit-slider-runnable-track { border-color: rgba(0, 0, 0, 0.14); background: linear-gradient(#6aa0d8, #3f7fc4) 0 / var(--vol-pct, 0%) 100% no-repeat, #dde1e5; }
+html[data-theme="light"] .volume-range::-webkit-slider-runnable-track { border-color: rgba(0, 0, 0, 0.14); background: linear-gradient(#86aed9, #6a97c9) 0 / var(--vol-pct, 0%) 100% no-repeat, #dde1e5; }
 html[data-theme="light"] #quranKhatmBar .surah.unread rect { fill: #c3c9d0; }
 html[data-theme="light"] .quran-switch { background: #b9c0c7; }
 
@@ -164,15 +165,15 @@ html[data-theme="light"] #adhanOffsetSettings .border-start.border-light { borde
 html[data-theme="light"] #topCard .text-dark { color: #343a40 !important; }
 
 /* mute the saturated blues */
-html[data-theme="light"] .btn-primary { --bs-btn-bg: #3f7fc4; --bs-btn-border-color: #3f7fc4; --bs-btn-hover-bg: #336ea8; --bs-btn-hover-border-color: #336ea8; --bs-btn-active-bg: #336ea8; --bs-btn-active-border-color: #336ea8; --bs-btn-disabled-bg: #3f7fc4; --bs-btn-disabled-border-color: #3f7fc4; --bs-btn-focus-shadow-rgb: 63, 127, 196; }
-html[data-theme="light"] .offadj.currentVakit { background-color: #3f7fc4 !important; }
-html[data-theme="light"] .px-switch.on { background: #3f7fc4; }
-html[data-theme="light"] .von { border-left-color: #3f7fc4; }
-html[data-theme="light"] .custom-tooltip { --bs-tooltip-bg: #3f7fc4; }
-html[data-theme="light"] .volume-range::-webkit-slider-thumb { background: #6aa0d8; }
+html[data-theme="light"] .btn-primary { --bs-btn-bg: #6a97c9; --bs-btn-border-color: #6a97c9; --bs-btn-hover-bg: #5885b8; --bs-btn-hover-border-color: #5885b8; --bs-btn-active-bg: #5885b8; --bs-btn-active-border-color: #5885b8; --bs-btn-disabled-bg: #6a97c9; --bs-btn-disabled-border-color: #6a97c9; --bs-btn-focus-shadow-rgb: 106, 151, 201; }
+html[data-theme="light"] .offadj.currentVakit { background-color: #6a97c9 !important; }
+html[data-theme="light"] .px-switch.on { background: #6a97c9; }
+html[data-theme="light"] .von { border-left-color: #6a97c9; }
+html[data-theme="light"] .custom-tooltip { --bs-tooltip-bg: #6a97c9; }
+html[data-theme="light"] .volume-range::-webkit-slider-thumb { background: #86aed9; }
 html[data-theme="light"] .volume-range:hover::-webkit-slider-thumb, html[data-theme="light"] .volume-range:focus::-webkit-slider-thumb { background: #5590cc; }
-html[data-theme="light"] #calcAngleNoticeBar { border-color: #3f7fc4; }
-html[data-theme="light"] .badge.bg-primary { background-color: #3f7fc4 !important; }
+html[data-theme="light"] #calcAngleNoticeBar { border-color: #6a97c9; }
+html[data-theme="light"] .badge.bg-primary { background-color: #6a97c9 !important; }
 
 /* ---- Salawat tab: a sage-and-parchment page with deep green text and antique gold ---- */
 html[data-theme="light"] #topCard.salawat-active > .card-header { background: linear-gradient(180deg, #e9ecef, #dee2e6) !important; border-bottom: 1px solid rgba(0, 0, 0, 0.18); }
@@ -216,8 +217,8 @@ html[data-theme="light"] .quran-surah-name, html[data-theme="light"] .quran-sura
 
 /* remaining-time box: its inline colour is whitesmoke-on-gray (the red last-hour state is left alone) */
 
-/* clock face: lighter slate lines than the icons */
-html[data-theme="light"] #clock { filter: invert(0.62) hue-rotate(180deg); }
+/* clock face: lines match the remaining-time text (#343a40) */
+html[data-theme="light"] #clock { filter: invert(0.82) hue-rotate(180deg); }
 
 /* salawat chevrons: deeper gold arrows on a stronger quarter-circle */
 html[data-theme="light"] .salawat-arrow stop:nth-child(1) { stop-color: #868e96; }
@@ -228,7 +229,7 @@ html[data-theme="light"] .salawat-asma-row .quran-disp-next { background: linear
 
 /* the offsets-page volume slider shares .volume-range with the Qur'an one: keep its track neutral grey, not parchment */
 html[data-theme="light"] #adhanOffsetSettings .volume-range::-webkit-slider-runnable-track {
-    border-color: #c0c7ce; background: linear-gradient(#6aa0d8, #3f7fc4) 0 / var(--vol-pct, 0%) 100% no-repeat, #cfd5db;
+    border-color: #c0c7ce; background: linear-gradient(#86aed9, #6a97c9) 0 / var(--vol-pct, 0%) 100% no-repeat, #cfd5db;
 }
 
 /* white info (i) icons */
@@ -239,32 +240,32 @@ html[data-theme="light"] .badge.bg-darkish { background-color: #d3d9df; color: #
 
 /* off-state toggle switches */
 html[data-theme="light"] .px-switch { background: #b9c0c7; }
-html[data-theme="light"] .px-switch.on { background: #3f7fc4; }
+html[data-theme="light"] .px-switch.on { background: #6a97c9; }
 
-html[data-theme="light"] .adlink { color: #5a626a; background-color: transparent; }
-html[data-theme="light"] .adlink:hover { color: #212529; background-color: #e6e9ec; }
+html[data-theme="light"] .adlink { color: #5a626a; background-color: rgba(0, 0, 0, 0.04); border-color: rgba(0, 0, 0, 0.12); }
+html[data-theme="light"] .adlink:hover { color: #212529; background-color: rgba(0, 0, 0, 0.08); border-color: rgba(0, 0, 0, 0.22); }
 
 /* calendar: swap the yellow holiday accents for the theme blue */
-html[data-theme="light"] .cal-holyday-remaining { background-color: #3f7fc4; color: #fff; }
+html[data-theme="light"] .cal-holyday-remaining { background-color: #6a97c9; color: #fff; }
 html[data-theme="light"] .cal-holyday-remaining.remaining-today { background-color: #198754; color: #fff; }
-html[data-theme="light"] .cal-holyday-item.is-soon { background-color: rgba(63, 127, 196, 0.12); border-inline-start-color: #3f7fc4; }
-html[data-theme="light"] .cal-day.holyday .cal-dot { background-color: #3f7fc4; }
+html[data-theme="light"] .cal-holyday-item.is-soon { background-color: rgba(106, 151, 201, 0.12); border-inline-start-color: #6a97c9; }
+html[data-theme="light"] .cal-day.holyday .cal-dot { background-color: #6a97c9; }
 html[data-theme="light"] .cal-day.holyday.other-month .cal-dot { background-color: #a9c4e2; }
 
 /* Hijri month name in the calendar title and the month-start day numbers: blue instead of gold */
 html[data-theme="light"] .cal-title .cal-title-hijri,
-html[data-theme="light"] .cal-day.cal-hijri-month-start .cal-hijri { color: #3f7fc4; }
+html[data-theme="light"] .cal-day.cal-hijri-month-start .cal-hijri { color: #6a97c9; }
 
 /* alarms: blue accent instead of gold (nafl keeps its green) */
-html[data-theme="light"] .alarm-add-btn { --bs-btn-color: #fff; --bs-btn-bg: #3f7fc4; --bs-btn-border-color: #3f7fc4; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #336ea8; --bs-btn-hover-border-color: #336ea8; --bs-btn-active-color: #fff; --bs-btn-active-bg: #336ea8; --bs-btn-active-border-color: #336ea8; --bs-btn-focus-shadow-rgb: 63, 127, 196; }
-html[data-theme="light"] #addAlarmButton { color: #fff; background-color: #3f7fc4; border-color: #3f7fc4; --bs-btn-focus-shadow-rgb: 63, 127, 196; }
-html[data-theme="light"] #addAlarmButton:hover { background-color: #336ea8; border-color: #336ea8; }
-html[data-theme="light"] #alarms-tab #add-alarm-tab.active { color: #fff; background-color: #3f7fc4; }
-html[data-theme="light"] .alarm-time { color: #2d6aa8; background-color: rgba(63, 127, 196, 0.12); border-color: rgba(63, 127, 196, 0.5); }
+html[data-theme="light"] .alarm-add-btn { --bs-btn-color: #fff; --bs-btn-bg: #6a97c9; --bs-btn-border-color: #6a97c9; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #5885b8; --bs-btn-hover-border-color: #5885b8; --bs-btn-active-color: #fff; --bs-btn-active-bg: #5885b8; --bs-btn-active-border-color: #5885b8; --bs-btn-focus-shadow-rgb: 106, 151, 201; }
+html[data-theme="light"] #addAlarmButton { color: #fff; background-color: #6a97c9; border-color: #6a97c9; --bs-btn-focus-shadow-rgb: 106, 151, 201; }
+html[data-theme="light"] #addAlarmButton:hover { background-color: #5885b8; border-color: #5885b8; }
+html[data-theme="light"] #alarms-tab #add-alarm-tab.active { color: #fff; background-color: #6a97c9; }
+html[data-theme="light"] .alarm-time { color: #2d6aa8; background-color: rgba(106, 151, 201, 0.12); border-color: rgba(106, 151, 201, 0.5); }
 html[data-theme="light"] .alarm-time.nafl-time { color: #2f6e4d; background-color: rgba(90, 158, 122, 0.16); border-color: rgba(90, 158, 122, 0.55); }
 html[data-theme="light"] .alarm-time.alarm-time-off { color: #5a626a; background-color: rgba(0, 0, 0, 0.04); border-color: rgba(0, 0, 0, 0.15); }
-html[data-theme="light"] .alarm-tip { background-color: rgba(63, 127, 196, 0.1); border-inline-start-color: #3f7fc4; }
-html[data-theme="light"] .alarm-tip svg { stroke: #3f7fc4; }
+html[data-theme="light"] .alarm-tip { background-color: rgba(106, 151, 201, 0.1); border-inline-start-color: #6a97c9; }
+html[data-theme="light"] .alarm-tip svg { stroke: #6a97c9; }
 
 html[data-theme="light"] .adlink-logo[src*="azanclock"] { filter: none; opacity: 0.75; }
 
@@ -272,7 +273,7 @@ html[data-theme="light"] .adlink-logo[src*="azanclock"] { filter: none; opacity:
 html[data-theme="light"] .lastHourHilite .px-switch.on { background: #F20031; }
 
 /* settings tab action buttons: soft tints instead of solid blue / red / grey */
-html[data-theme="light"] #settingsCodeButton { --bs-btn-color: #2d5f94; --bs-btn-bg: #dbe7f4; --bs-btn-border-color: #c3d6ea; --bs-btn-hover-color: #234b78; --bs-btn-hover-bg: #cbddf0; --bs-btn-hover-border-color: #b3cbe4; --bs-btn-active-color: #234b78; --bs-btn-active-bg: #cbddf0; --bs-btn-active-border-color: #b3cbe4; --bs-btn-focus-shadow-rgb: 63, 127, 196; }
+html[data-theme="light"] #settingsCodeButton { --bs-btn-color: #2d5f94; --bs-btn-bg: #dbe7f4; --bs-btn-border-color: #c3d6ea; --bs-btn-hover-color: #234b78; --bs-btn-hover-bg: #cbddf0; --bs-btn-hover-border-color: #b3cbe4; --bs-btn-active-color: #234b78; --bs-btn-active-bg: #cbddf0; --bs-btn-active-border-color: #b3cbe4; --bs-btn-focus-shadow-rgb: 106, 151, 201; }
 html[data-theme="light"] #appResetButton { --bs-btn-color: #a8323e; --bs-btn-bg: #f6dfe1; --bs-btn-border-color: #ecc8cb; --bs-btn-hover-color: #8c2832; --bs-btn-hover-bg: #f0cfd2; --bs-btn-hover-border-color: #e3b8bc; --bs-btn-active-color: #8c2832; --bs-btn-active-bg: #f0cfd2; --bs-btn-active-border-color: #e3b8bc; --bs-btn-focus-shadow-rgb: 168, 50, 62; }
 html[data-theme="light"] #appResetButton.text-light { color: var(--bs-btn-color) !important; }
 html[data-theme="light"] #themeToggle { --bs-btn-color: #495057; --bs-btn-bg: #dde1e5; --bs-btn-border-color: #cfd5da; --bs-btn-hover-color: #212529; --bs-btn-hover-bg: #d0d6dc; --bs-btn-hover-border-color: #c0c7ce; --bs-btn-active-color: #212529; --bs-btn-active-bg: #d0d6dc; --bs-btn-active-border-color: #c0c7ce; }
@@ -281,20 +282,17 @@ html[data-theme="light"] #themeToggle { --bs-btn-color: #495057; --bs-btn-bg: #d
 html[data-theme="light"] #vakitsRow1 .bg-dark, html[data-theme="light"] #vakitsRow2 .bg-dark {
     background-color: #ffffff !important; border-color: #9fb0c3 !important; color: #212529;
 }
-html[data-theme="light"] #nextText[style*="whitesmoke"] { background-color: #ffffff !important; color: #343a40 !important; border: 1px solid #c9d2dc; }
+html[data-theme="light"] #nextText[style*="whitesmoke"] { background-color: #ffffff !important; color: #343a40 !important; box-shadow: inset 0 0 0 1px #c9d2dc; }
 html[data-theme="light"] .btn-dark { --bs-btn-color: #343a40; --bs-btn-bg: #dde1e5; --bs-btn-border-color: #cdd3d9; --bs-btn-hover-color: #212529; --bs-btn-hover-bg: #cfd5db; --bs-btn-hover-border-color: #bcc3ca; --bs-btn-active-color: #212529; --bs-btn-active-bg: #cfd5db; --bs-btn-active-border-color: #bcc3ca; --bs-btn-disabled-color: #9aa1a8; --bs-btn-disabled-bg: #eceff2; --bs-btn-disabled-border-color: #e0e4e8; }
-html[data-theme="light"] #elapsedText.bg-darkish { background-color: #ffffff; border: 1px solid #c9d2dc; }
-
-/* clock face sits on a white disc (on a wrapper: the filter on #clock would invert a background on the img itself) */
-html[data-theme="light"] .clock-wrap { padding: 8px; background-color: #ffffff; border-radius: 50%; box-shadow: 0 0 0 1px #d6dce2; }
-html[data-theme="light"] #clock { max-height: 188px; }   /* 204px minus the disc's 2 x 8px padding, so the page height is the same in both themes */
+html[data-theme="light"] #elapsedText.bg-darkish { background-color: transparent; }
 
 /* lighter settings: the grey panels / inactive buttons become white with a hairline border */
 html[data-theme="light"] .bg-darkish, html[data-theme="light"] .btn-darkish,
-html[data-theme="light"] .badge.bg-darkish, html[data-theme="light"] #alarms-tabContent { background-color: #ffffff; border: 1px solid #ffffff; }
+html[data-theme="light"] .badge.bg-darkish, html[data-theme="light"] #alarms-tabContent { background-color: #ffffff; }
+html[data-theme="light"] .btn-darkish { border-color: #ffffff; }
 html[data-theme="light"] .btn-darkish:hover { background-color: #eef1f4; border-color: #c4ccd4; }
 html[data-theme="light"] .px-switch { background: #c3cad1; }
-html[data-theme="light"] .px-switch.on { background: #3f7fc4; }
+html[data-theme="light"] .px-switch.on { background: #6a97c9; }
 html[data-theme="light"] .lastHourHilite .px-switch.on { background: #F20031; }
 
 /* khatm bar: the surah currently loaded is saffron (the dark-mode gold gets lost on the light track) */
@@ -305,8 +303,13 @@ html[data-theme="light"] #quranKhatmBar .surah.read rect { fill: #3f9468; }
 html[data-theme="light"] #settingBoxduha { border-bottom-width: 0; }
 html[data-theme="light"] #settingBoxduhaend { border-top-width: 0; }
 
-/* main tab: the two date badges get a white border (same as their fill, so no visible outline) */
-html[data-theme="light"] .fdate .badge { border-color: #ffffff; }
+/* main tab: the two date badges have no outline */
+html[data-theme="light"] .fdate .badge { box-shadow: none; }
 
 /* audio-off icon: boost the red X that the invert filter dulls */
 html[data-theme="light"] .adhan-off { filter: invert(0.7) hue-rotate(180deg) saturate(3); }
+/* mic-na.png is only ~30% opaque white: darken it and stack shadows to firm up the faint glyph */
+html[data-theme="light"] img[src$="mic-na.png"] { filter: brightness(0) drop-shadow(0 0 0 #8d959d) drop-shadow(0 0 0 #8d959d) drop-shadow(0 0 0 #8d959d); }
+
+/* icon-style selector: the generated icons use light-on-dark text, so give the unselected button a dark chip */
+html[data-theme="light"] .iconButton.btn-darkish { --bs-btn-bg: #c4cad0; --bs-btn-border-color: #c4cad0; --bs-btn-hover-bg: #ccd2d7; --bs-btn-hover-border-color: #ccd2d7; --bs-btn-active-bg: #ccd2d7; --bs-btn-active-border-color: #ccd2d7; background-color: #c4cad0; border-color: #c4cad0; }

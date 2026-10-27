@@ -560,7 +560,7 @@ function updateClock(canvas, r) {
 
     if (aroundTheClock) {
         drawArc(canvas, 0, 2 * Math.PI + Math.PI / 40, r * 1.19, arcLineWidth, colors.silver);
-        drawHand(canvas, nextVakit.startAngle12, r * 1.15, r * 1.22, arcLineWidth / 1.7, colors.gray);
+        drawGap(canvas, nextVakit.startAngle12, r * 1.15, r * 1.22, arcLineWidth / 1.7);
     }
     else {
         drawArc(canvas, currentVakit.startAngle12, currentVakit.endAngle12, r * 1.19, arcLineWidth, colors.silver);
@@ -583,15 +583,15 @@ function updateClock(canvas, r) {
             appData.twoThirdTime = format12(appData.twoThirdTime)
 
         let midnightRadians = timeToRadians(getPrayerTime('midnight'), 12);
-        drawHand(canvas, midnightRadians, r * 1.15, r * 1.22, arcLineWidth / 1.7, colors.gray);
+        drawGap(canvas, midnightRadians, r * 1.15, r * 1.22, arcLineWidth / 1.7);
         printAt(canvas, '1/2', fractionTextSize, colors.silver, r, midnightRadians);
 
         let oneThirdRadians = timeToRadians(getPrayerTime('maghrib'), 12) + oneThird * 2 * Math.PI / 720;
-        drawHand(canvas, oneThirdRadians, r * 1.15, r * 1.22, arcLineWidth / 1.7, colors.gray);
+        drawGap(canvas, oneThirdRadians, r * 1.15, r * 1.22, arcLineWidth / 1.7);
         printAt(canvas, '1/3', fractionTextSize, colors.silver, r, oneThirdRadians);
 
         let twoThirdRadians = timeToRadians(getPrayerTime('maghrib'), 12) + twoThird * 2 * Math.PI / 720;
-        drawHand(canvas, twoThirdRadians, r * 1.15, r * 1.22, arcLineWidth / 1.7, colors.gray);
+        drawGap(canvas, twoThirdRadians, r * 1.15, r * 1.22, arcLineWidth / 1.7);
         printAt(canvas, '2/3', fractionTextSize, colors.silver, r, twoThirdRadians);
 
     }
@@ -948,6 +948,15 @@ function drawHand(canvas, angle, from, to, lineWidth, color) {
     canvas.strokeStyle = color;
     canvas.lineCap = "round";
     canvas.stroke();
+    canvas.restore();
+}
+
+/* A gap in the clock arc (the 1/3, 1/2, 2/3 and next-vakit marks): erase the arc instead of painting
+   over it in a theme colour, so the gap is truly transparent whatever background the popup uses. */
+function drawGap(canvas, angle, from, to, lineWidth) {
+    canvas.save();
+    canvas.globalCompositeOperation = 'destination-out';
+    drawHand(canvas, angle, from, to, lineWidth, '#000');
     canvas.restore();
 }
 
