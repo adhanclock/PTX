@@ -260,7 +260,12 @@ $(function () {
 
     /* header play/pause toggle (visible on every tab) */
     $('#quranHeaderToggle').click(() => quranSend({ quranToggle: true }));
-    chrome.storage.local.get(['quranState'], (r) => quranUpdateHeaderToggle(!!(r.quranState && r.quranState.isPlaying)));
+    chrome.storage.local.get(['quranState'], (r) => {
+        const playing = !!(r.quranState && r.quranState.isPlaying);
+        quranUpdateHeaderToggle(playing);
+        /* Qur'an audio is playing: open the popup straight on the Qur'an tab instead of the main one */
+        if (playing && navigator.onLine) $('#menu-div-quran').click();
+    });
 
     /* hide the Qur'an tab + header toggle when there's no internet connection */
     quranUpdateConnectivity();
@@ -810,7 +815,7 @@ const displayAdhansAndOffsets = () => {
         /* adhan settings */
         if (appData.settings.adhans.hasOwnProperty(v)) {
             aoContent += `<div class="col-1">`;
-            aoContent += `<img title='${thisAudioTitle}' class="${appData.settings.areAdhansEnabled ? 'adhanRecitorBtn pointerOn' : ''} ms-1 img-fluid" data-name=${v} src="images/mic${appData.settings.areAdhansEnabled ? '.svg' : '-na.png'}"/>`;
+            aoContent += `<img title='${thisAudioTitle}' class="${appData.settings.areAdhansEnabled ? 'adhanRecitorBtn pointerOn' : ''} ms-1 img-fluid" data-name=${v} src="images/mic${appData.settings.areAdhansEnabled ? '.svg' : '-na.svg'}"/>`;
             aoContent += `</div>`;
         }
         else {

@@ -170,8 +170,8 @@ html[data-theme="light"] .offadj.currentVakit { background-color: #6a97c9 !impor
 html[data-theme="light"] .px-switch.on { background: #6a97c9; }
 html[data-theme="light"] .von { border-left-color: #6a97c9; }
 html[data-theme="light"] .custom-tooltip { --bs-tooltip-bg: #6a97c9; }
-html[data-theme="light"] .volume-range::-webkit-slider-thumb { background: #86aed9; }
-html[data-theme="light"] .volume-range:hover::-webkit-slider-thumb, html[data-theme="light"] .volume-range:focus::-webkit-slider-thumb { background: #5590cc; }
+html[data-theme="light"] .volume-range::-webkit-slider-thumb { background: #4a82c0; border-color: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.3); }
+html[data-theme="light"] .volume-range:hover::-webkit-slider-thumb, html[data-theme="light"] .volume-range:focus::-webkit-slider-thumb { background: #3871ad; }
 html[data-theme="light"] #calcAngleNoticeBar { border-color: #6a97c9; }
 html[data-theme="light"] .badge.bg-primary { background-color: #6a97c9 !important; }
 
@@ -242,8 +242,8 @@ html[data-theme="light"] .badge.bg-darkish { background-color: #d3d9df; color: #
 html[data-theme="light"] .px-switch { background: #b9c0c7; }
 html[data-theme="light"] .px-switch.on { background: #6a97c9; }
 
-html[data-theme="light"] .adlink { color: #5a626a; background-color: rgba(0, 0, 0, 0.04); border-color: rgba(0, 0, 0, 0.12); }
-html[data-theme="light"] .adlink:hover { color: #212529; background-color: rgba(0, 0, 0, 0.08); border-color: rgba(0, 0, 0, 0.22); }
+html[data-theme="light"] .adlink { color: #5a626a; background-color: transparent; border-color: rgba(0, 0, 0, 0.12); }
+html[data-theme="light"] .adlink:hover { color: #212529; background-color: transparent; border-color: rgba(0, 0, 0, 0.22); }
 
 /* calendar: swap the yellow holiday accents for the theme blue */
 html[data-theme="light"] .cal-holyday-remaining { background-color: #6a97c9; color: #fff; }
@@ -273,10 +273,10 @@ html[data-theme="light"] .adlink-logo[src*="azanclock"] { filter: none; opacity:
 html[data-theme="light"] .lastHourHilite .px-switch.on { background: #F20031; }
 
 /* settings tab action buttons: soft tints instead of solid blue / red / grey */
-html[data-theme="light"] #settingsCodeButton { --bs-btn-color: #2d5f94; --bs-btn-bg: #dbe7f4; --bs-btn-border-color: #c3d6ea; --bs-btn-hover-color: #234b78; --bs-btn-hover-bg: #cbddf0; --bs-btn-hover-border-color: #b3cbe4; --bs-btn-active-color: #234b78; --bs-btn-active-bg: #cbddf0; --bs-btn-active-border-color: #b3cbe4; --bs-btn-focus-shadow-rgb: 106, 151, 201; }
-html[data-theme="light"] #appResetButton { --bs-btn-color: #a8323e; --bs-btn-bg: #f6dfe1; --bs-btn-border-color: #ecc8cb; --bs-btn-hover-color: #8c2832; --bs-btn-hover-bg: #f0cfd2; --bs-btn-hover-border-color: #e3b8bc; --bs-btn-active-color: #8c2832; --bs-btn-active-bg: #f0cfd2; --bs-btn-active-border-color: #e3b8bc; --bs-btn-focus-shadow-rgb: 168, 50, 62; }
+html[data-theme="light"] #settingsCodeButton { --bs-btn-color: #343a40; --bs-btn-bg: transparent; --bs-btn-border-color: #c3d6ea; --bs-btn-hover-color: #343a40; --bs-btn-hover-bg: transparent; --bs-btn-hover-border-color: #b3cbe4; --bs-btn-active-color: #343a40; --bs-btn-active-bg: transparent; --bs-btn-active-border-color: #b3cbe4; --bs-btn-focus-shadow-rgb: 106, 151, 201; }
+html[data-theme="light"] #appResetButton { --bs-btn-color: #343a40; --bs-btn-bg: transparent; --bs-btn-border-color: #ecc8cb; --bs-btn-hover-color: #343a40; --bs-btn-hover-bg: transparent; --bs-btn-hover-border-color: #e3b8bc; --bs-btn-active-color: #343a40; --bs-btn-active-bg: transparent; --bs-btn-active-border-color: #e3b8bc; --bs-btn-focus-shadow-rgb: 168, 50, 62; }
 html[data-theme="light"] #appResetButton.text-light { color: var(--bs-btn-color) !important; }
-html[data-theme="light"] #themeToggle { --bs-btn-color: #495057; --bs-btn-bg: #dde1e5; --bs-btn-border-color: #cfd5da; --bs-btn-hover-color: #212529; --bs-btn-hover-bg: #d0d6dc; --bs-btn-hover-border-color: #c0c7ce; --bs-btn-active-color: #212529; --bs-btn-active-bg: #d0d6dc; --bs-btn-active-border-color: #c0c7ce; }
+html[data-theme="light"] #themeToggle { --bs-btn-color: #343a40; --bs-btn-bg: transparent; --bs-btn-border-color: #cfd5da; --bs-btn-hover-color: #343a40; --bs-btn-hover-bg: transparent; --bs-btn-hover-border-color: #c0c7ce; --bs-btn-active-color: #343a40; --bs-btn-active-bg: transparent; --bs-btn-active-border-color: #c0c7ce; }
 
 /* lighter light mode: no heavy dark blocks. Highlights are white / pale with a border instead. */
 html[data-theme="light"] #vakitsRow1 .bg-dark, html[data-theme="light"] #vakitsRow2 .bg-dark {
@@ -308,8 +308,8 @@ html[data-theme="light"] .fdate .badge { box-shadow: none; }
 
 /* audio-off icon: boost the red X that the invert filter dulls */
 html[data-theme="light"] .adhan-off { filter: invert(0.7) hue-rotate(180deg) saturate(3); }
-/* mic-na.png is only ~30% opaque white: darken it and stack shadows to firm up the faint glyph */
-html[data-theme="light"] img[src$="mic-na.png"] { filter: brightness(0) drop-shadow(0 0 0 #8d959d) drop-shadow(0 0 0 #8d959d) drop-shadow(0 0 0 #8d959d); }
+/* mic-na.svg is only ~30% opaque white: darken it and stack shadows to firm up the faint glyph */
+html[data-theme="light"] img[src$="mic-na.svg"] { filter: brightness(0) drop-shadow(0 0 0 #8d959d) drop-shadow(0 0 0 #8d959d) drop-shadow(0 0 0 #8d959d); }
 
 /* icon-style selector: the generated icons use light-on-dark text, so give the unselected button a dark chip */
 html[data-theme="light"] .iconButton.btn-darkish { --bs-btn-bg: #c4cad0; --bs-btn-border-color: #c4cad0; --bs-btn-hover-bg: #ccd2d7; --bs-btn-hover-border-color: #ccd2d7; --bs-btn-active-bg: #ccd2d7; --bs-btn-active-border-color: #ccd2d7; background-color: #c4cad0; border-color: #c4cad0; }

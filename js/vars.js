@@ -46,6 +46,7 @@ const adhanAudios = [
 	{ id: 13, name: 'Shaykh Ali Ahmed Mullah (4:35)', isFajrAdhan: true, isAdhan: false },
 	{ id: 14, name: 'Madinah Style by Muhammad Marwan Qassas (4:10)', isFajrAdhan: false, isAdhan: true },
 	{ id: 15, name: 'Madinah Style by Muhammad Marwan Qassas (5:03)', isFajrAdhan: true, isAdhan: false },
+	{ id: 16, name: 'Wadee Al-Yamani (3:50)', isFajrAdhan: false, isAdhan: true },
 	{ id: 101, name: 'Bismillahirrahmanirrahim (0:05)', isFajrAdhan: true, isAdhan: true, isAlarm: true },
 	{ id: 102, name: 'Soft Beep Sound (0:01)', isFajrAdhan: true, isAdhan: true, isAlarm: true },
 ];

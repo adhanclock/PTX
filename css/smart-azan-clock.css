@@ -1540,7 +1540,7 @@ body {
     white-space: nowrap;
 }
 
-/* the switch itself: a small pill track with a sliding knob — muted grey when off, emerald when on */
+/* the switch itself: a small pill track with a sliding knob — muted grey when off, the play-button green (#198754) when on */
 .quran-switch {
     position: relative;
     flex: 0 0 auto;
@@ -1567,7 +1567,7 @@ body {
 }
 
 .quran-auto-toggle[aria-checked="true"] .quran-switch {
-    background: #22c55e;
+    background: #198754;
 }
 
 .quran-auto-toggle[aria-checked="true"] .quran-switch-knob {
@@ -2385,7 +2385,7 @@ html[data-theme="light"] #themeToggle .theme-icon-sun {
     align-items: center;
     gap: 6px;
     padding: 2px 10px 2px 3px;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     color: #aab1b8;
     background-color: rgba(255, 255, 255, 0.06);
@@ -2453,27 +2453,27 @@ html[data-theme="light"] #themeToggle .theme-icon-sun {
 /* ---------- Offsets tab action buttons: muted tints rather than solid blue / red / grey ---------- */
 
 #settingsCodeButton {
-    --bs-btn-color: #8fbdf0;
-    --bs-btn-bg: #25384d;
+    --bs-btn-color: #f8f9fa;
+    --bs-btn-bg: transparent;
     --bs-btn-border-color: #34506f;
-    --bs-btn-hover-color: #b0d2f7;
-    --bs-btn-hover-bg: #2d4560;
+    --bs-btn-hover-color: #f8f9fa;
+    --bs-btn-hover-bg: transparent;
     --bs-btn-hover-border-color: #3f6189;
-    --bs-btn-active-color: #b0d2f7;
-    --bs-btn-active-bg: #2d4560;
+    --bs-btn-active-color: #f8f9fa;
+    --bs-btn-active-bg: transparent;
     --bs-btn-active-border-color: #3f6189;
     --bs-btn-focus-shadow-rgb: 63, 127, 196;
 }
 
 #appResetButton {
-    --bs-btn-color: #f0a3ab;
-    --bs-btn-bg: #45282d;
+    --bs-btn-color: #f8f9fa;
+    --bs-btn-bg: transparent;
     --bs-btn-border-color: #633740;
-    --bs-btn-hover-color: #f6bcc2;
-    --bs-btn-hover-bg: #55303a;
+    --bs-btn-hover-color: #f8f9fa;
+    --bs-btn-hover-bg: transparent;
     --bs-btn-hover-border-color: #7a4450;
-    --bs-btn-active-color: #f6bcc2;
-    --bs-btn-active-bg: #55303a;
+    --bs-btn-active-color: #f8f9fa;
+    --bs-btn-active-bg: transparent;
     --bs-btn-active-border-color: #7a4450;
     --bs-btn-focus-shadow-rgb: 168, 50, 62;
 }
@@ -2483,14 +2483,14 @@ html[data-theme="light"] #themeToggle .theme-icon-sun {
 }
 
 #themeToggle {
-    --bs-btn-color: #ced4da;
-    --bs-btn-bg: #31373E;
+    --bs-btn-color: #f8f9fa;
+    --bs-btn-bg: transparent;
     --bs-btn-border-color: #3f464e;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #3b424a;
+    --bs-btn-hover-color: #f8f9fa;
+    --bs-btn-hover-bg: transparent;
     --bs-btn-hover-border-color: #4a525c;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #3b424a;
+    --bs-btn-active-color: #f8f9fa;
+    --bs-btn-active-bg: transparent;
     --bs-btn-active-border-color: #4a525c;
 }
 

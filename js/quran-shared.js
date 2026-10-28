@@ -21,7 +21,8 @@ function quranReciterCdnId(identifier) {
 const QURAN_ALT_AUDIO_BASES = {
     'mp3quran.sudais': 'https://cdn.mp3quran.net/audio/abdulrahman-sudais/r1/',
     'mp3quran.maher': 'https://cdn.mp3quran.net/audio/maher-muaiqly/r1/',
-    'mp3quran.mahermujawwad': 'https://cdn.mp3quran.net/audio/maher-muaiqly/r3/'
+    'mp3quran.mahermujawwad': 'https://cdn.mp3quran.net/audio/maher-muaiqly/r3/',
+    'mp3quran.wadieyamani': 'https://cdn.mp3quran.net/audio/wadee-yamani/r1/'
 };
 
 function quranSurahAudioUrl(surahNumber, reciterIdentifier) {
