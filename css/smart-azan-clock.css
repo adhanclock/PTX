@@ -1644,24 +1644,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 11px;
-    max-width: 300px;
+    gap: 8px;
+    max-width: 320px;
     max-height: 100%;     /* lets the dua box shrink + scroll instead of overflowing the card */
     min-height: 0;
-}
-
-/* mihrab arch with a hanging lamp, in warm gold */
-.quran-congrats-ornament {
-    flex-shrink: 0;
-    width: 52px;
-    height: 58px;
-    filter: drop-shadow(0 3px 10px rgba(212, 175, 55, 0.35));
-}
-
-.quran-congrats-ornament svg {
-    display: block;
-    width: 100%;
-    height: 100%;
 }
 
 /* gold rule with a small centered diamond between the ornament and the congrats line — echoes
@@ -1695,9 +1681,9 @@ body {
 }
 
 .quran-congrats-text {
-    font-size: 19px;
+    font-size: 15px;
     font-weight: 700;
-    line-height: 1.5;
+    line-height: 1.4;
     /* same warm-gold gradient as the surah title */
     background: linear-gradient(180deg, #fdeeb8 0%, #e7cf86 55%, #d4af37 100%);
     -webkit-background-clip: text;
@@ -1712,19 +1698,38 @@ body {
     flex: 0 1 auto;
     min-height: 0;
     overflow-y: auto;
-    padding: 8px 12px;
-    border: 1px solid rgba(194, 168, 106, 0.35);
+    padding: 10px 14px;
+    border: 1px solid rgba(194, 168, 106, 0.28);
     border-radius: 8px;
-    background: rgba(212, 175, 55, 0.05);
-    font-family: 'Amiri', 'Scheherazade New', 'Al Bayan', 'Geeza Pro', 'Noto Naskh Arabic', serif;
-    font-size: 16px;
-    line-height: 1.85;
-    color: #efe3c2;
-    text-align: center;
+    background: #24282b;              /* solid, a step lighter than the overlay (#1b1e21), no gold tint */
+    font-family: 'UthmanicHafs', 'Amiri', 'Scheherazade New', 'Al Bayan', 'Geeza Pro', 'Noto Naskh Arabic', serif;
+    font-size: 20px;
+    line-height: 2.1;
+    color: #e6dcc0;
+    text-align: right;
 }
+
+/* slim gold scrollbar on a dark track — the overlay keeps its gold look in both themes, so the
+   `html` prefix out-ranks the light-theme .csb scrollbar colours */
+html .quran-congrats-dua::-webkit-scrollbar { width: 6px; }
+html .quran-congrats-dua::-webkit-scrollbar-track { background: rgba(212, 175, 55, 0.08); border-radius: 3px; }
+html .quran-congrats-dua::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.6); border-radius: 3px; }
+html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
 
 .quran-congrats-dua p {
     margin: 0;
+}
+
+/* section divider inside the dua: the Arabic comma, which the Uthmanic Hafs font draws as the dotted
+   verse-end circle (same glyph as the salawat page), set inline in the running text */
+.quran-congrats-dua .quran-dua-divider {
+    font-family: 'UthmanicHafs', 'Amiri', serif;
+    color: #d4af37;
+}
+
+/* plain pause inside a sentence: Amiri draws the Arabic comma as a comma (Hafs would draw the circle) */
+.quran-congrats-dua .quran-dua-comma {
+    font-family: 'Amiri', serif;
 }
 
 .quran-congrats-dua p + p {
@@ -1737,10 +1742,10 @@ body {
     background: linear-gradient(180deg, #e7cf86 0%, #d4af37 100%);
     border: 0;
     color: #3a2e08;                   /* dark ink on the gold pill */
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     border-radius: 999px;
-    padding: 9px 30px;
+    padding: 5px 20px;
     cursor: pointer;
     box-shadow: 0 2px 9px rgba(212, 175, 55, 0.32);
     transition: filter 0.15s ease, transform 0.05s ease;
