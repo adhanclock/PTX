@@ -22,7 +22,14 @@ const QURAN_ALT_AUDIO_BASES = {
     'mp3quran.sudais': 'https://cdn.mp3quran.net/audio/abdulrahman-sudais/r1/',
     'mp3quran.maher': 'https://cdn.mp3quran.net/audio/maher-muaiqly/r1/',
     'mp3quran.mahermujawwad': 'https://cdn.mp3quran.net/audio/maher-muaiqly/r3/',
-    'mp3quran.wadieyamani': 'https://cdn.mp3quran.net/audio/wadee-yamani/r1/'
+    'mp3quran.wadieyamani': 'https://cdn.mp3quran.net/audio/wadee-yamani/r1/',
+    'mp3quran.minshawi': 'https://cdn.mp3quran.net/audio/muhammad-minshawi/r1/',
+    'mp3quran.husary': 'https://cdn.mp3quran.net/audio/mahmoud-husary/r1/',
+    'mp3quran.saadalghamdi': 'https://cdn.mp3quran.net/audio/saad-ghamdi/r1/',
+    'mp3quran.shatri': 'https://cdn.mp3quran.net/audio/abubakr-shatri/r1/',
+    'mp3quran.alijaber': 'https://cdn.mp3quran.net/audio/ali-jaber/r1/',
+    'mp3quran.budair': 'https://cdn.mp3quran.net/audio/salah-budair/r1/',
+    'mp3quran.abdulmohsenqasim': 'https://cdn.mp3quran.net/audio/abdulmohsen-qasim/r1/'
 };
 
 function quranSurahAudioUrl(surahNumber, reciterIdentifier) {

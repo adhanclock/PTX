@@ -698,7 +698,6 @@ const setFields = async () => {
         });
     }
 
-    $('#audioVolumeIcon').attr('src', 'images/audio-' + appData.settings.volume + '.png');
     $('#audioVolumeDiv').attr('title', 'Audio Volume: ' + appData.settings.volume);
     /* Volume applies to both adhan and alarm audio (see callAlarm in
        serviceWorker.js), so keep the slider enabled even when adhan calls are

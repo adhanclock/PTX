@@ -2455,26 +2455,26 @@ html[data-theme="light"] #themeToggle .theme-icon-sun {
 #settingsCodeButton {
     --bs-btn-color: #f8f9fa;
     --bs-btn-bg: transparent;
-    --bs-btn-border-color: #34506f;
+    --bs-btn-border-color: #3f464e;
     --bs-btn-hover-color: #f8f9fa;
     --bs-btn-hover-bg: transparent;
-    --bs-btn-hover-border-color: #3f6189;
+    --bs-btn-hover-border-color: #4a525c;
     --bs-btn-active-color: #f8f9fa;
     --bs-btn-active-bg: transparent;
-    --bs-btn-active-border-color: #3f6189;
+    --bs-btn-active-border-color: #4a525c;
     --bs-btn-focus-shadow-rgb: 63, 127, 196;
 }
 
 #appResetButton {
     --bs-btn-color: #f8f9fa;
     --bs-btn-bg: transparent;
-    --bs-btn-border-color: #633740;
+    --bs-btn-border-color: #3f464e;
     --bs-btn-hover-color: #f8f9fa;
     --bs-btn-hover-bg: transparent;
-    --bs-btn-hover-border-color: #7a4450;
+    --bs-btn-hover-border-color: #4a525c;
     --bs-btn-active-color: #f8f9fa;
     --bs-btn-active-bg: transparent;
-    --bs-btn-active-border-color: #7a4450;
+    --bs-btn-active-border-color: #4a525c;
     --bs-btn-focus-shadow-rgb: 168, 50, 62;
 }
 
