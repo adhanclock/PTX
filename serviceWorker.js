@@ -559,19 +559,19 @@ function updateClock(canvas, r) {
     */
 
     if (aroundTheClock) {
-        drawArc(canvas, 0, 2 * Math.PI + Math.PI / 40, r * 1.19, arcLineWidth, colors.silver);
+        drawArc(canvas, 0, 2 * Math.PI + Math.PI / 40, r * 1.19, arcLineWidth, colors.silver, true);
         drawGap(canvas, nextVakit.startAngle12, r * 1.15, r * 1.22, arcLineWidth / 1.7);
     }
     else {
-        drawArc(canvas, currentVakit.startAngle12, currentVakit.endAngle12, r * 1.19, arcLineWidth, colors.silver);
+        drawArc(canvas, currentVakit.startAngle12, currentVakit.endAngle12, r * 1.19, arcLineWidth, colors.silver, true);
     }
 
     if (currentVakit.name === 'Isha' || currentVakit.name === 'Midnight') {
 
         if (!appData.settings.showImsak)
-            drawArc(canvas, ishaFajrVakit.startAngle12, ishaFajrVakit.endAngle12, r * 1.19, arcLineWidth, colors.silver);
+            drawArc(canvas, ishaFajrVakit.startAngle12, ishaFajrVakit.endAngle12, r * 1.19, arcLineWidth, colors.silver, true);
         else
-            drawArc(canvas, ishaImsakVakit.startAngle12, ishaImsakVakit.endAngle12, r * 1.19, arcLineWidth, colors.silver);
+            drawArc(canvas, ishaImsakVakit.startAngle12, ishaImsakVakit.endAngle12, r * 1.19, arcLineWidth, colors.silver, true);
 
         let fractionTextSize = r * 0.13;
         let totalMinutesInIsha = diffMinutesBetweenTimes(getPrayerTime('maghrib'), getPrayerTime('fajr'));
@@ -606,7 +606,11 @@ function updateClock(canvas, r) {
     drawHand(canvas, minuteRadians, -r * 0.05, r * 1.05, arcLineWidth, colors.silver);
     drawHand(canvas, secondRadians, -r * 0.1, r * 1.1, arcLineWidth / 4, colors.silver);
 
-    fillCircle(canvas, r * 0.02, 0, 0, colors.gray);
+    /* erase (not paint) the centre dot so it shows the popup background in both themes */
+    canvas.save();
+    canvas.globalCompositeOperation = 'destination-out';
+    fillCircle(canvas, r * 0.02, 0, 0, '#000');
+    canvas.restore();
     drawNumbers12(canvas, r * 1.01, colors.silver);
 
     if (clockFaceVakit) {
@@ -884,12 +888,18 @@ function printAt(canvas, text, size, color, r, angle) {
 
 }
 
-function drawArc(canvas, startAngle, endAngle, radius, lineWidth, color) {
+/* round: rounded ends. A round cap overshoots each end by half the line width, so a partial arc is
+   pulled in by that much to keep its true start/end angles. */
+function drawArc(canvas, startAngle, endAngle, radius, lineWidth, color, round) {
+    if (round && endAngle - startAngle < 2 * Math.PI) {
+        const pad = lineWidth / 2 / radius;
+        if (endAngle - startAngle > 2 * pad) { startAngle += pad; endAngle -= pad; }
+    }
     canvas.save();
     canvas.beginPath();
     canvas.arc(0, 0, radius, startAngle, endAngle, false);
     canvas.lineWidth = lineWidth;
-    canvas.lineCap = "butt";
+    canvas.lineCap = round ? "round" : "butt";
     canvas.strokeStyle = color;
     canvas.stroke();
     canvas.restore();
