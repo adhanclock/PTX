@@ -187,12 +187,9 @@ html[data-theme="light"] #salawatTab::before {
 }
 html[data-theme="light"] #salawatTab::after { opacity: 0.1; }
 html[data-theme="light"] .salawat-card {
-    border-color: rgba(0, 0, 0, 0.3);
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(250, 251, 252, 0.98));
 }
-html[data-theme="light"] .salawat-card::after { background: linear-gradient(180deg, rgba(250, 251, 252, 0), #fafbfc); }
 html[data-theme="light"] .salawat-asma-row, html[data-theme="light"] .salawat-foot { border-color: rgba(0, 0, 0, 0.18); }
-html[data-theme="light"] .salawat-asma-row .quran-disp-nav { background: linear-gradient(135deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.03)); border-color: rgba(0, 0, 0, 0.22); }
 html[data-theme="light"] .salawat-asma-row .quran-disp-next { background: linear-gradient(225deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.03)); }
 html[data-theme="light"] .salawat-arabic { color: #1f3d2b; text-shadow: none; }
 html[data-theme="light"] .salawat-status { color: #6b7075; }
@@ -223,7 +220,6 @@ html[data-theme="light"] #clock { filter: invert(0.82) hue-rotate(180deg); }
 html[data-theme="light"] .salawat-arrow stop:nth-child(1) { stop-color: #868e96; }
 html[data-theme="light"] .salawat-arrow stop:nth-child(2) { stop-color: #5f676f; }
 html[data-theme="light"] .salawat-arrow stop:nth-child(3) { stop-color: #3f464d; }
-html[data-theme="light"] .salawat-asma-row .quran-disp-nav { background: linear-gradient(135deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.05)); border-color: rgba(0, 0, 0, 0.3); }
 html[data-theme="light"] .salawat-asma-row .quran-disp-next { background: linear-gradient(225deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.05)); }
 
 /* the offsets-page volume slider shares .volume-range with the Qur'an one: keep its track neutral grey, not parchment */

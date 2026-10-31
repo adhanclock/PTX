@@ -1813,15 +1813,15 @@ async function salawatShare() {
                 try { const u = new URL(salawatCurrent.link); if (u.protocol === 'https:') linkText = (u.host + u.pathname + u.search).replace(/^www\./, '').replace(/\/$/, ''); } catch (e) { }
                 const linkEl = linkText && line(linkText, 'white-space:nowrap;padding:10px 12px 0;letter-spacing:0.02em;text-transform:uppercase;border-top:1px solid ' + (light ? 'rgba(0,0,0,0.18)' : 'rgba(231,207,134,0.4)') + ';color:' + (light ? '#6c757d' : '#cfc7a6') + ';');
                 /* each footer line shrinks to fit on one line (measured here: the clone's own scrollWidth is not reliable) */
-                const fit = (d, text, ls) => {
+                const fit = (d, text, ls, max = 12) => {
                     const ctx = document.createElement('canvas').getContext('2d');
                     ctx.font = '12px ' + getComputedStyle(card).fontFamily;
                     const w = ctx.measureText(text).width + text.length * 12 * ls;
-                    d.style.fontSize = Math.min(12, Math.floor(120 * (W - 28) / w) / 10) + 'px';
+                    d.style.fontSize = Math.min(max,Math.floor(120 * (W - 28) / w) / 10) + 'px';
                 };
                 if (linkEl) fit(linkEl, linkText.toUpperCase(), 0.02);
-                const credit = 'Prayer Times Chrome Extension by AdhanClock.com';
-                fit(line(credit, 'white-space:nowrap;padding:' + (linkText ? '6px' : '10px') + ' 12px 14px;letter-spacing:0.04em;' + (linkText ? '' : 'border-top:1px solid ' + (light ? 'rgba(0,0,0,0.18)' : 'rgba(231,207,134,0.4)') + ';') + 'color:' + (light ? '#6c757d' : '#e7cf86') + ';'), credit, 0.04);
+                const credit = 'Shared from Prayer Times Chrome Extension by AdhanClock.com';
+                fit(line(credit, 'white-space:nowrap;padding:' + (linkText ? '6px' : '10px') + ' 12px 14px;letter-spacing:0.04em;' + (linkText ? '' : 'border-top:1px solid ' + (light ? 'rgba(0,0,0,0.18)' : 'rgba(231,207,134,0.4)') + ';') + 'color:' + (light ? '#868e96' : 'rgba(231,207,134,0.55)') + ';'), credit, 0.04, 10);   /* the credit stays small: 10px at most */
             }
         });
         let canvas = await render(SALAWAT_SHARE_W);

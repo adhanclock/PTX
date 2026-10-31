@@ -2029,19 +2029,7 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
-    padding: 6px 12px 26px;   /* bottom room so the footer clears the fade */
-}
-
-/* soft fade where the text meets the card's bottom border */
-.salawat-card::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 22px;
-    background: linear-gradient(180deg, rgba(5, 33, 23, 0), #052117);
-    pointer-events: none;
+    padding: 6px 12px 12px;   /* keeps the footer buttons off the bottom edge */
 }
 
 /* ONE gilded card (double border, glass fill) holds the asma on top and the scrolling text
@@ -2053,14 +2041,10 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 0 0 8px;      /* flush with the menu bar above */
-    border-radius: 14px;
-    border: 1px solid rgba(231, 207, 134, 0.75);
-    background: linear-gradient(180deg, rgba(6, 40, 28, 0.88), rgba(5, 33, 23, 0.92));   /* near-opaque so the lattice / ghost dome never sit behind the text */
-    border-left: 0;       /* full width: the card runs edge to edge of the green field, framed by a single gold line top and bottom */
-    border-right: 0;
-    border-top: 0;
+    margin: 0;            /* flush with the menu bar above and the bottom edge */
+    border: 0;            /* full width and borderless: the card runs edge to edge of the green field */
     border-radius: 0;
+    background: linear-gradient(180deg, rgba(6, 40, 28, 0.88), rgba(5, 33, 23, 0.92));   /* near-opaque so the lattice / ghost dome never sit behind the text */
     overflow: hidden;
 }
 
@@ -2074,47 +2058,14 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     border-bottom: 1px solid rgba(231, 207, 134, 0.4);   /* hairline between the asma and the text */
 }
 
-/* prev / next live in the top corners of the card as quarter circles, pinned to the corner so
-   they never move however tall the asma row grows; the chevron sits near the corner */
+/* prev / next: just the gold chevrons, vertically centred at the left and right edges of the asma row */
 .salawat-asma-row .quran-disp-nav {
-    top: 0;
-    transform: none;
-    width: 42px;
+    width: 38px;
     height: 42px;
-    filter: none;
-    background: linear-gradient(135deg, rgba(231, 207, 134, 0.22), rgba(231, 207, 134, 0.06));
-    border: 0 solid rgba(231, 207, 134, 0.5);
 }
-
-.salawat-asma-row .quran-disp-prev {
-    left: 0;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 7px 0 0 7px;
-    border-bottom-width: 1px;
-    border-right-width: 1px;
-    border-bottom-right-radius: 100%;
-}
-
-.salawat-asma-row .quran-disp-next {
-    right: 0;
-    align-items: flex-start;
-    justify-content: flex-end;
-    padding: 7px 7px 0 0;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-bottom-left-radius: 100%;
-    background: linear-gradient(225deg, rgba(231, 207, 134, 0.22), rgba(231, 207, 134, 0.06));
-}
-
-.salawat-asma-row .quran-disp-nav:hover,
-.salawat-asma-row .quran-disp-nav:active,
-.salawat-asma-row .quran-disp-nav:disabled { transform: none; }
-
-.salawat-asma-row .quran-disp-nav:hover:not(:disabled) { filter: brightness(1.5); }
 
 .salawat-asma-row.title-only {
-    min-height: 42px;   /* just tall enough for the corner arrows */
+    min-height: 42px;   /* just tall enough for the arrows */
     padding-top: 4px;
     padding-bottom: 4px;
 }
@@ -2122,8 +2073,8 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
 .salawat-asma-row.title-only .salawat-asma-title { padding: 5px 40px 0; }
 
 .salawat-asma-row .quran-disp-nav svg {
-    width: 22px;
-    height: 22px;
+    width: 32px;
+    height: 32px;
 }
 
 .salawat-arabic {
