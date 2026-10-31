@@ -1707,6 +1707,7 @@ body {
     line-height: 2.1;
     color: #e6dcc0;
     text-align: right;
+    direction: ltr;                   /* puts the scrollbar on the right; the paragraphs below stay rtl */
 }
 
 /* slim gold scrollbar on a dark track — the overlay keeps its gold look in both themes, so the
@@ -1717,6 +1718,7 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb { background: rgba(212, 175, 5
 html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
 
 .quran-congrats-dua p {
+    direction: rtl;
     margin: 0;
 }
 
@@ -2020,7 +2022,7 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
 .salawat-wrap {
     min-height: 0;
     padding-top: 0;
-    margin: 0 -8px;   /* the tab sits 16px in from the green field; with the 8px top / bottom card margin all four sides are 8px */
+    margin: 0 -16px;   /* the tab sits 16px in from the green field, so this lets the card reach its edges */
 }
 
 .salawat-scroll {
@@ -2051,11 +2053,14 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 8px 0;
+    margin: 0 0 8px;      /* flush with the menu bar above */
     border-radius: 14px;
     border: 1px solid rgba(231, 207, 134, 0.75);
     background: linear-gradient(180deg, rgba(6, 40, 28, 0.88), rgba(5, 33, 23, 0.92));   /* near-opaque so the lattice / ghost dome never sit behind the text */
-    box-shadow: inset 0 0 0 3px rgba(4, 36, 24, 0.55), inset 0 0 0 4px rgba(231, 207, 134, 0.5), 0 2px 14px rgba(0, 0, 0, 0.28);
+    border-left: 0;       /* full width: the card runs edge to edge of the green field, framed by a single gold line top and bottom */
+    border-right: 0;
+    border-top: 0;
+    border-radius: 0;
     overflow: hidden;
 }
 
@@ -2213,7 +2218,8 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
 .salawat-asma-ar {
     font-family: 'UthmanicHafs', 'Amiri', 'Scheherazade New', 'Al Bayan', 'Geeza Pro', 'Noto Naskh Arabic', serif;
     font-size: 28px;
-    line-height: 2;
+    line-height: 1.4;     /* tight between wrapped lines of a long name ... */
+    padding: 8px 0;       /* ... with the room above and below kept (same height as before for one line) so the gradient fill never clips the diacritics */
     background: linear-gradient(180deg, #fdeeb8 0%, #e7cf86 55%, #d4af37 100%);
     -webkit-background-clip: text;
     background-clip: text;
