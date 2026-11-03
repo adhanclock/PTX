@@ -165,7 +165,7 @@ const calendarLocale = {
 		today: 'Today', tomorrow: 'Tomorrow', inDays: 'in {n} days',
 		noUpcoming: 'No upcoming holy days',
 		hijriNewYear: 'Islamic New Year', ashura: 'Day of Ashura',
-		mawlid: "Mawlid (Prophet's Birthday ﷺ)", israMiraj: "Isra and Mi'raj",
+		mawlid: 'Mawlid an-Nabi ﷺ', israMiraj: "Isra and Mi'raj",
 		rajabStart: 'First Day of Rajab', laylatAlRaghaib: 'Laylat al-Raghaib',
 		midShaban: "Mid-Sha'ban", ramadanStart: 'First Day of Ramadan',
 		laylatAlQadr: 'Laylat al-Qadr', eidAlFitr: 'Eid al-Fitr',

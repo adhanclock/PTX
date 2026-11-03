@@ -2,7 +2,7 @@
    random every time the popup opens. To add another, append an entry here (icon lives in images/). */
 const adlinks = [
     { url: 'https://zakattracker.com', icon: 'images/zakattracker-logo.png', text: 'Calculate and Track Your Zakat' },
-    { url: 'https://azanclock.com', icon: 'images/azanclock-logo.png', text: 'Set up your own azan clock' }
+    { url: 'https://adhanclock.com/setup', icon: 'images/azanclock-logo.png', text: 'Set up your own adhan clock' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {

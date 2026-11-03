@@ -2042,9 +2042,9 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     flex-direction: column;
     position: relative;
     margin: 0;            /* flush with the menu bar above and the bottom edge */
-    border: 0;            /* full width and borderless: the card runs edge to edge of the green field */
-    border-radius: 0;
+    border: 0;
     background: linear-gradient(180deg, rgba(6, 40, 28, 0.88), rgba(5, 33, 23, 0.92));   /* near-opaque so the lattice / ghost dome never sit behind the text */
+    border-radius: 0;
     overflow: hidden;
 }
 
@@ -2058,14 +2058,47 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     border-bottom: 1px solid rgba(231, 207, 134, 0.4);   /* hairline between the asma and the text */
 }
 
-/* prev / next: just the gold chevrons, vertically centred at the left and right edges of the asma row */
+/* prev / next live in the top corners of the card as quarter circles, pinned to the corner so
+   they never move however tall the asma row grows; the chevron sits near the corner */
 .salawat-asma-row .quran-disp-nav {
-    width: 38px;
+    top: 0;
+    transform: none;
+    width: 42px;
     height: 42px;
+    filter: none;
+    background: linear-gradient(135deg, rgba(231, 207, 134, 0.22), rgba(231, 207, 134, 0.06));
+    border: 0 solid rgba(231, 207, 134, 0.5);
 }
 
+.salawat-asma-row .quran-disp-prev {
+    left: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 7px 0 0 7px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+    border-bottom-right-radius: 100%;
+}
+
+.salawat-asma-row .quran-disp-next {
+    right: 0;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 7px 7px 0 0;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-bottom-left-radius: 100%;
+    background: linear-gradient(225deg, rgba(231, 207, 134, 0.22), rgba(231, 207, 134, 0.06));
+}
+
+.salawat-asma-row .quran-disp-nav:hover,
+.salawat-asma-row .quran-disp-nav:active,
+.salawat-asma-row .quran-disp-nav:disabled { transform: none; }
+
+.salawat-asma-row .quran-disp-nav:hover:not(:disabled) { filter: brightness(1.5); }
+
 .salawat-asma-row.title-only {
-    min-height: 42px;   /* just tall enough for the arrows */
+    min-height: 42px;   /* just tall enough for the corner arrows */
     padding-top: 4px;
     padding-bottom: 4px;
 }
@@ -2073,8 +2106,8 @@ html .quran-congrats-dua::-webkit-scrollbar-thumb:hover { background: #d4af37; }
 .salawat-asma-row.title-only .salawat-asma-title { padding: 5px 40px 0; }
 
 .salawat-asma-row .quran-disp-nav svg {
-    width: 32px;
-    height: 32px;
+    width: 22px;
+    height: 22px;
 }
 
 .salawat-arabic {

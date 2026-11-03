@@ -15,6 +15,8 @@ const quranReciters = [
     {"identifier": "mp3quran.alijaber", "language": "ar", "name": "علي جابر", "englishName": "Ali Jaber", "format": "audio", "type": "surahbysurah"},
     {"identifier": "mp3quran.budair", "language": "ar", "name": "صلاح البدير", "englishName": "Salah Al-Budair", "format": "audio", "type": "surahbysurah"},
     {"identifier": "mp3quran.abdulmohsenqasim", "language": "ar", "name": "عبد المحسن القاسم", "englishName": "Abdulmohsen Al-Qasim", "format": "audio", "type": "surahbysurah"},
+    {"identifier": "mp3quran.raadkurdi", "language": "ar", "name": "رعد الكردي", "englishName": "Raad Al-Kurdi", "format": "audio", "type": "surahbysurah"},
+    {"identifier": "mp3quran.peshawakurdi", "language": "ar", "name": "پێشەوا قادر الكردي", "englishName": "Peshawa Qadr Al-Kurdi", "format": "audio", "type": "surahbysurah"},
     {"identifier": "ar.abdulbasitmurattal-surah", "language": "ar", "name": "عبد الباسط عبد الصمد (مرتَّل)", "englishName": "Abdul Basit Abdus-Samad (Murattal)", "format": "audio", "type": "surahbysurah"},
     {"identifier": "ar.abdulbasitmujawwad", "language": "ar", "name": "عبد الباسط عبد الصمد (مجوَّد)", "englishName": "Abdul Basit Abdus-Samad (Mujawwad)", "format": "audio", "type": "surahbysurah"},
     {"identifier": "ar.adilkalbani","language": "ar","name": "عادل الكلباني","englishName": "Adil al-Kalbani","format": "audio","type": "surahbysurah","direction": null},

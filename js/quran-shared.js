@@ -29,7 +29,9 @@ const QURAN_ALT_AUDIO_BASES = {
     'mp3quran.shatri': 'https://cdn.mp3quran.net/audio/abubakr-shatri/r1/',
     'mp3quran.alijaber': 'https://cdn.mp3quran.net/audio/ali-jaber/r1/',
     'mp3quran.budair': 'https://cdn.mp3quran.net/audio/salah-budair/r1/',
-    'mp3quran.abdulmohsenqasim': 'https://cdn.mp3quran.net/audio/abdulmohsen-qasim/r1/'
+    'mp3quran.abdulmohsenqasim': 'https://cdn.mp3quran.net/audio/abdulmohsen-qasim/r1/',
+    'mp3quran.raadkurdi': 'https://cdn.mp3quran.net/audio/raad-kurdi/r1/',
+    'mp3quran.peshawakurdi': 'https://cdn.mp3quran.net/audio/peshawa-kurdi/r1/'
 };
 
 function quranSurahAudioUrl(surahNumber, reciterIdentifier) {
